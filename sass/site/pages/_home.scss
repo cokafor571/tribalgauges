@@ -1,0 +1,122 @@
+// gauges and fake gauges
+.gauges,
+.fake-gauges {
+
+    h1 {
+        text-align: center;
+        font-size: 1.75rem;
+
+        @include title-uline;
+    }
+
+    .gauge-types,
+    .fake-gauge-types {
+        max-width: 1280px;
+        display: flex;
+        position: relative;
+        margin: 0 auto;
+
+        .plugs-gauges,
+        .spirals-tapers-gauges,
+        .tunnels-gauges,
+        .fake-spiral-tapers-gauges,
+        .fake-hanging-woods-gauges,
+        .fake-plug-gauges {
+            margin: 0 auto;
+
+            .plugs-img,
+            .spirals-tapers-img,
+            .tunnels-img,
+            .fake-plugs-img,
+            .fake-hanging-woods-img,
+            .fake-plug-img {
+                position: relative;
+                z-index: 0;
+                @include dark-background;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            button {
+                color: #fff;
+                padding: 5px 10px;
+                border: 2px solid #fff;
+                background: transparent;
+                position: relative;
+                z-index: 2;
+                top: -70px;
+                display: block;
+                margin: 0 auto;
+
+                h2 {
+                    font-size: 1rem;
+                    font-weight: bold;
+                }
+            }
+        }
+    }    
+}
+
+//free bag and piercing divides
+.divider {
+    width: 1255px;
+    max-width: 100%; 
+    border-bottom: 5px double #ccc;
+    height: 2.5em;
+    margin: 0 auto;
+    text-align: center;
+
+    .free-bag,
+    .piercing-care {
+        display: inline-block;
+        background: #eee;
+        padding: 0 5%;
+        
+        .flex-bag {
+            display: flex;
+            align-items: center;
+            
+            h2 {
+                font-size: 1.25rem;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+    }
+}
+
+//accessories
+.accessories-block {
+    display: flex;
+    max-width: 1280px;
+    margin: 0 auto;
+
+    img {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .accessories {
+        margin: 0 auto;
+
+        h2 {
+            font-size: 1.25rem;
+            @include title-uline;
+
+            &:after {
+                margin: 0;
+            }
+        }
+
+        p {
+            font-size: 1.25rem;
+        }
+    }
+}

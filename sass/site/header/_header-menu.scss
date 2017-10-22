@@ -1,0 +1,269 @@
+//navigation placeholder
+.main-navigation-wrapper {
+  height: 65px;
+}
+
+.main-navigation {
+  width: 100%;
+  background: #fff;
+  height: 65px;
+  display: flex;
+  z-index: 2;
+  font-size: 1rem;
+
+  &.fixed-nav {
+    position: fixed;
+    animation: translateFixedNav .6s;
+    transform: translateZ(0);
+    top: 0;
+    background: #fff;
+    box-shadow: inset 0 0 200px rgba(0,0,0,.1), inset 0 0 20px rgba(0,0,0,.08);
+    transition: background .25s linear;
+    z-index: 3;
+    max-width: 1280px;
+  }
+
+  .custom-logo-link {
+    flex: .5;
+
+    img {
+      height: 50px;
+      width: auto;
+      max-height: 100%;
+    }
+
+    @media screen and ( min-width: $query__small ) {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  @media screen and ( min-width: $query__small ) {
+    top: 40px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    align-items: center;
+  }
+
+  .menu-header-menu-container {
+    flex: 2;
+
+    @media screen and ( max-width: $query__small ) {
+
+      .menu > li {
+        margin-bottom: .5em;
+      }
+    }
+  }
+
+  ul {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding-top: 1em;
+    padding-left: 0;
+
+    ul {
+      display: none;
+      z-index: 99999;
+
+      ul {
+        top: 0;
+      }
+
+      li {
+        padding-left: 1em;
+
+        &:hover > ul,
+        &.focus > ul {
+          left: 100%;
+        }
+      }
+
+      a {
+        width: 200px;
+      }
+    }
+
+    li:hover > ul,
+    li.focus > ul {
+      left: auto;
+    }
+  }
+
+  li {
+    position: relative;
+  }
+
+  a {
+    text-decoration: none;
+    color: $color__site-black;
+  }
+
+  a:hover,
+  a:focus {
+    text-decoration: underline;
+  }
+
+  .current_page_item > a,
+  .current-menu-item > a,
+  .current_page_ancestor > a,
+  .current-menu-ancestor > a {
+  }
+
+  .menu-item-has-children,
+  .page-item-has-children {
+  }
+  .menu-item-has-children > a,
+  .page_item_has_children > a {
+  }
+}
+
+.dropdown-symbol {
+    color: $color__site-black;
+}
+
+.menu-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  margin: 1.2em 1.2em 0 0;
+  padding: .6em .8em;
+  font-size: 80%;
+  text-transform: uppercase;
+  color: white;
+  border: 1px solid hsla(0, 0%, 100%, .3);
+  background: transparent;
+  z-index: 2;
+}
+
+/* Toggle small menu and sub-menus on */
+.toggled-on ul,
+.sub-menu.toggled-on, .children.toggled-on {
+  display: block;
+  position: relative;
+  width: 180px;
+  margin: 0 auto;
+
+  @media screen and ( min-width: $query__small ) {
+    position: absolute;
+  }
+}
+
+@media screen and (min-width: $query__small) {
+  .menu-toggle {
+    display: none;
+  }
+
+  .main-navigation {
+
+    ul {
+      display: flex;
+
+      ul {
+        flex-direction: column;
+        background: rgb( 255,255,255 );
+        margin-left: 0;
+        top: 47px;
+
+        li {
+          padding-left: 0;
+
+          a {
+            width: 218px;
+            background: none;
+            margin: 0;
+            padding: 0;
+          }
+        }
+      }
+
+      li {
+        margin: 0 1em;
+
+        a {
+          padding: .4em .5em;
+          cursor: pointer;
+        }
+      }
+    }
+
+  }
+}
+
+@media screen and (min-width: $query__medium) {
+  .main-navigation {
+
+    ul {
+      padding-top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+  }
+}
+
+//woocommerce menu
+.woo-menu {
+  display: flex;
+  justify-content: flex-start;
+  flex: 1;
+
+  form {
+    margin: auto auto;
+    
+    input {
+      font-size: 1rem;
+
+      &[type="submit"] {
+        font-family: FontAwesome;
+        font-size: 1rem;
+        border: 0;
+        padding: 0 0 0 .25em;
+        background: none;
+      }
+    }
+  }
+
+  .cart-contents {
+    transform: scale(.9);
+
+    &:before {
+      font-family:WooCommerce;
+      content: "\e01d";
+      font-size:24px;
+      margin-top:10px;
+      font-style:normal;
+      font-weight:400;
+      padding-right:5px;
+      vertical-align: bottom;
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .cart-contents-count {
+    color: #fff;
+    background-color: #2ecc71;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 1px 6px;
+    line-height: 1;
+    font-family: $font__sans;
+    vertical-align: top;
+  }
+}
+
+//woocommerce cart dropdown
+.secondary-cart {
+  position: relative;
+  margin-right: 20px;
+
+  .cart-dropdown {
+    position: absolute;
+  }
+}

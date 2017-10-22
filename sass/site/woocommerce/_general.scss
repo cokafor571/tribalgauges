@@ -1,0 +1,115 @@
+//cart and checkout headers
+.entry-content > .cart-checkout-header {
+    text-align: center;
+    font-size: 2rem;
+    font-family: $font__sans;
+    color: rgba( 0,0,0,.65 );
+    margin-bottom: 2em;
+
+    .active {
+        opacity: .5;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    i {
+        padding: 0 .25em;
+        color: rgba(0,0,0,.5);
+    }
+}
+
+//general woocommerce layout
+.woocommerce {
+    font-family: $font__sans;
+
+    //info
+    .woocommerce-info {
+        border: none;
+        margin-bottom: 0;
+        font-size: 1rem;
+        background: none;
+
+        +.checkout_coupon {
+            border: none;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    //breadcrumbs
+    .woocommerce-breadcrumb {
+        background-color: #f5f5f5;
+        padding: 1em .5em;
+        font-size: .9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-top: 1px solid #d2d2d2;
+        border-bottom: 1px solid #d2d2d2;
+    }
+
+    //page title area
+    .woocommerce-products-header {
+        padding: 0 .5em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 2em;
+
+        h1 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+        }
+
+        .woocommerce-result-count {
+            font-size: 1rem;
+        }
+
+        .woocommerce-ordering select {
+            padding: .5em;
+            background: #e1e1e1;
+
+            option {
+                background: #fff;
+            }
+        }
+    }
+
+    //page product layout
+    #container {
+        flex-basis: 75%;
+        padding: 0 1em;
+    }
+
+    //page sidebar layout
+    .widget-area {
+        flex-basis: 25%;
+        padding: 0 1em;
+        
+        &#secondary {
+            width: 25%;
+        }
+
+        section {
+            padding: 0;
+
+            h2 {
+                background: #42413D;
+                color: #fff;
+                border-radius: 2px;
+                padding: .5em;
+                font-size: 1rem;
+                margin-bottom: 1em;
+            }
+            
+            
+            .dropdown_product_cat,
+            .select2-selection__rendered {
+                border: none;
+                border-bottom: 2px solid #e1e1e1;
+            }
+        }
+    }
+}

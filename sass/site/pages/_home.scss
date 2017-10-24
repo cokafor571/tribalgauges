@@ -1,12 +1,14 @@
 // gauges and fake gauges
 .gauges,
 .fake-gauges {
+    opacity: 0;
 
     h1 {
         text-align: center;
         font-size: 1.75rem;
+        margin-bottom: 2em;
 
-        @include title-uline;
+        @include title-uline( $line-color: rgba(0,0,0,.9), $line-width: 60px );
     }
 
     .gauge-types,
@@ -14,7 +16,7 @@
         max-width: 1280px;
         display: flex;
         position: relative;
-        margin: 0 auto;
+        margin: 0 auto 2em;
 
         .plugs-gauges,
         .spirals-tapers-gauges,
@@ -43,7 +45,7 @@
 
             button {
                 color: #fff;
-                padding: 5px 10px;
+                padding: 10px 15px;
                 border: 2px solid #fff;
                 background: transparent;
                 position: relative;
@@ -51,45 +53,76 @@
                 top: -70px;
                 display: block;
                 margin: 0 auto;
+                transition: background .25s linear;
+
+                &:hover {
+                    background: #000;
+                    font-weight: 700;
+                }
 
                 h2 {
                     font-size: 1rem;
                     font-weight: bold;
+                    margin: 0;
+                    padding: 5px 10px;
                 }
             }
         }
     }    
 }
 
+//animate gauges
+.gauges {
+    
+    &.animate-element {
+        animation: translateLeft 1s ease-out both, appear 1s linear both;
+    }
+}
+
+.fake-gauges {
+    
+    &.animate-element {
+        animation: translateRight 1s ease-out both, appear 1s linear both;
+    }
+}
+
 //free bag and piercing divides
-.divider {
-    width: 1255px;
-    max-width: 100%; 
-    border-bottom: 5px double #ccc;
-    height: 2.5em;
-    margin: 0 auto;
-    text-align: center;
+.free-bag,
+.piercing-care {
+    display: flex;
+    background: url( 'http://tribalgauges.dev/wp-content/uploads/2017/10/ricepaper-bg.png' ) repeat center center;
+    padding: 1em;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3em;
 
-    .free-bag,
-    .piercing-care {
-        display: inline-block;
-        background: #eee;
-        padding: 0 5%;
-        
-        .flex-bag {
-            display: flex;
-            align-items: center;
+    .piercing-scale {
+        display: flex;
+        align-items: center;
+        color: #777;
+
+        &:hover {
             
-            h2 {
-                font-size: 1.25rem;
-            }
-
             img {
-                max-width: 100%;
-                height: auto;
+                transform: scale(1.1);
             }
         }
     }
+        
+    h2 {
+        font-size: 1.25rem;
+        margin: 0 1.5em;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        transition: transform .25s linear;
+    }
+}
+
+.piercing-care {
+    background: url( 'http://tribalgauges.dev/wp-content/uploads/2017/10/green_dust_scratch.png' ) repeat center center;
 }
 
 //accessories
@@ -97,6 +130,13 @@
     display: flex;
     max-width: 1280px;
     margin: 0 auto;
+    opacity: 0;
+    align-items: center;
+    margin-bottom: 3em;
+
+    &.animate-element {
+        animation: appear 1s linear both;
+    }
 
     img {
         display: block;
@@ -107,8 +147,9 @@
         margin: 0 auto;
 
         h2 {
-            font-size: 1.25rem;
-            @include title-uline;
+            font-size: 1.35rem;
+            @include title-uline( $line-width: 60px );
+            margin: 0 0 1em;
 
             &:after {
                 margin: 0;
@@ -116,7 +157,20 @@
         }
 
         p {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
+            color: rgba(0,0,0,.8);
+        }
+
+        button {
+            background: $color__site-red-deep;
+            color: #fff;
+            font-size: 1.1rem;
+            padding: 10px 15px;
+            transition: transform .3s linear;
+
+            &:hover {
+                transform: scale(1.1);
+            }
         }
     }
 }

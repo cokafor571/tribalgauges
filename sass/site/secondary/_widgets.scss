@@ -242,9 +242,7 @@
 	}
 
 	@media screen and (min-width: $query__medium) {
-		/* Use flex to create a responsive layout */
 		display: flex;
-		flex-wrap: wrap;
 		justify-content: space-around;
 
 		/* If only one widget is displayed, make it full width. */

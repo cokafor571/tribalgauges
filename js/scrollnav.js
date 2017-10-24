@@ -12,8 +12,5 @@
         } else if ( $(window).width() > 600  && scrollTop < 40 ) {
             nav.removeClass( 'fixed-nav' ); 
         }
-
-        console.log(  'this is window', scrollTop );
-        console.log(  'this is nav', navDistance );
     });
 })( jQuery );

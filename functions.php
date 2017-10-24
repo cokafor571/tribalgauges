@@ -315,7 +315,12 @@ function starterpack_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
-    wp_enqueue_script( 'scrollnav', get_template_directory_uri() . '/js/scrollnav.js', array(), '20151215', true );
+    wp_enqueue_script( 'scrollnav', get_template_directory_uri() . '/js/scrollnav.js', array(), '20171022', true );
+
+    wp_enqueue_script( 'scrolltoelement', get_template_directory_uri() . '/js/scrolltoelement.js', array(), '20171022', true );
+
+    wp_enqueue_script( 'addviewcart', get_template_directory_uri() . '/js/addviewcart.js', array(), '20171022', true );
+    wp_localize_script( 'addviewcart', 'starterpack_ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 
     wp_enqueue_style( 'fa-icons', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' );
 }
@@ -443,3 +448,140 @@ function kia_add_script_to_footer(){
 <?php }
 }
 add_action( 'wp_footer', 'kia_add_script_to_footer' );
+
+/* 
+** Add to cart ajax on single product page */
+function add_custom_loop_add_to_cart() {
+
+global $product;
+
+if ( ! $product->is_purchasable() ) {
+	return;
+}
+
+echo wc_get_stock_html( $product );
+
+if ( $product->is_in_stock() ) :
+
+	do_action( 'woocommerce_before_add_to_cart_form' ); ?>
+
+	<form class="cart" method="post" enctype='multipart/form-data'>
+		<?php
+			/**
+			 * @since 2.1.0.
+			 */
+			do_action( 'woocommerce_before_add_to_cart_button' );
+
+			/**
+			 * @since 3.0.0.
+			 */
+			do_action( 'woocommerce_before_add_to_cart_quantity' );
+
+			woocommerce_quantity_input( array(
+				'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
+				'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $product->get_max_purchase_quantity(), $product ),
+				'input_value' => isset( $_POST['quantity'] ) ? wc_stock_amount( $_POST['quantity'] ) : $product->get_min_purchase_quantity(),
+			) );
+
+			/**
+			 * @since 3.0.0.
+			 */
+			do_action( 'woocommerce_after_add_to_cart_quantity' );
+
+			woocommerce_template_loop_add_to_cart();
+
+			/**
+			 * @since 2.1.0.
+			 */
+			do_action( 'woocommerce_after_add_to_cart_button' );
+		?>
+	</form>
+
+	<?php do_action( 'woocommerce_after_add_to_cart_form' ); ?>
+
+<?php endif; 
+	
+}
+
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
+add_action( 'woocommerce_single_product_summary', 'add_custom_loop_add_to_cart', 30 );
+
+
+
+/*
+** Add to cart ajax
+*/
+function starterpack_add_cart_ajax() {
+	$prodID = $_POST['prodID'];
+
+	WC()->cart->add_to_cart($prodID);
+
+	$items = WC()->cart->get_cart();
+	$item_count = count($items); ?>
+
+	<?php foreach($items as $item => $values) { 
+		$_product = $values['data']->post; ?>
+		
+		<div class="dropdown-cart-wrap">
+			<div class="dropdown-cart-left">
+				<!-- Checks whether the product is a variation, then display the variation image. -->
+				<?php $variation = $values['variation_id'];
+				if ($variation) {
+					echo get_the_post_thumbnail( $values['variation_id'], 'thumbnail' ); 
+				} else {
+					echo get_the_post_thumbnail( $values['product_id'], 'thumbnail' ); 
+				} ?>
+			</div>
+
+			<div class="dropdown-cart-right">
+				<h5><?php echo $_product->post_title; ?></h5>
+				<p><strong>Quantity:</strong> <?php echo $values['quantity']; ?></p>
+				<?php global $woocommerce;
+				$currency = get_woocommerce_currency_symbol();
+				$price = get_post_meta( $values['product_id'], '_regular_price', true);
+				$sale = get_post_meta( $values['product_id'], '_sale_price', true);
+				?>
+				 
+				<?php if($sale) { ?>
+					<p class="price"><strong>Price:</strong> <del><?php echo $currency; echo $price; ?></del> <?php echo $currency; echo $sale; ?></p>
+				<?php } elseif($price) { ?>
+					<p class="price"><strong>Price:</strong> <?php echo $currency; echo $price; ?></p>    
+				<?php } ?>
+			</div>
+
+			<div class="clear"></div>
+		</div>
+	<?php } ?>
+
+	<div class="dropdown-cart-wrap dropdown-cart-subtotal">
+		<div class="dropdown-cart-left">
+			<h6>Subtotal</h6>
+		</div>
+
+		<div class="dropdown-cart-right">
+			<h6><?php echo WC()->cart->get_cart_total(); ?></h6>
+		</div>
+
+		<div class="clear"></div>
+	</div>
+
+	<?php $cart_url = $woocommerce->cart->get_cart_url();
+	$checkout_url = $woocommerce->cart->get_checkout_url(); ?>
+
+	<div class="dropdown-cart-wrap dropdown-cart-links">
+		<div class="dropdown-cart-left dropdown-cart-link">
+			<a href="<?php echo $cart_url; ?>">View Cart</a>
+		</div>
+
+		<div class="dropdown-cart-right dropdown-checkout-link">
+			<a href="<?php echo $checkout_url; ?>">Checkout</a>
+		</div>
+
+		<div class="clear"></div>
+	</div>
+
+	<?php die();
+}
+
+add_action('wp_ajax_starterpack_add_cart', 'starterpack_add_cart_ajax');
+add_action('wp_ajax_nopriv_starterpack_add_cart', 'starterpack_add_cart_ajax');

@@ -21,7 +21,8 @@
 }
 
 //general woocommerce layout
-.woocommerce {
+.woocommerce,
+.woocommerce-page {
     font-family: $font__sans;
 
     //info
@@ -90,25 +91,25 @@
         
         &#secondary {
             width: 25%;
-        }
 
-        section {
-            padding: 0;
+            section {
+                padding: 0;
 
-            h2 {
-                background: #42413D;
-                color: #fff;
-                border-radius: 2px;
-                padding: .5em;
-                font-size: 1rem;
-                margin-bottom: 1em;
-            }
-            
-            
-            .dropdown_product_cat,
-            .select2-selection__rendered {
-                border: none;
-                border-bottom: 2px solid #e1e1e1;
+                h2 {
+                    background: #42413D;
+                    color: #fff;
+                    border-radius: 2px;
+                    padding: .5em;
+                    font-size: 1rem;
+                    margin-bottom: 1em;
+                }
+                
+                
+                .dropdown_product_cat,
+                .select2-selection__rendered {
+                    border: none;
+                    border-bottom: 2px solid #e1e1e1;
+                }
             }
         }
     }

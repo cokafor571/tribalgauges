@@ -102,7 +102,7 @@
 
   a:hover,
   a:focus {
-    text-decoration: underline;
+    color: $color__site-red-secondary;
   }
 
   .current_page_item > a,
@@ -228,7 +228,6 @@
   }
 
   .cart-contents {
-    transform: scale(.9);
 
     &:before {
       font-family:WooCommerce;
@@ -263,7 +262,130 @@
   position: relative;
   margin-right: 20px;
 
+  @include arrow;
+
+  &.show-arrow {
+    transition: opacity .25s linear;
+
+    &:before,
+    &:after {
+      opacity: 1;
+    }
+  }
+
   .cart-dropdown {
     position: absolute;
+    min-width: 260px;
+    padding: 1em .5em;
+    background: #fff;
+    box-shadow: 1px 1px 15px rgba(0,0,0,0.15);
+    border: 2px solid #ddd;
+    opacity: 0;
+    margin: 0;
+    transition: opacity .25s linear;
+    left: -9999px;
+    z-index: 5;
+
+    &.show-dropdown {
+      opacity: 1;
+      left: -211px;
+    }
+
+    .dropdown-cart-wrap {
+      display: flex;
+      align-items: center;
+      font-size: .75rem;
+      margin-bottom: 10px;
+
+      .dropdown-cart-left {
+          margin-right: .5em;
+
+          img {
+            padding: 0;
+            border: 0;
+            width: 100px;
+            margin: 0 auto;
+          }
+      }
+
+      .dropdown-cart-right {
+
+        h5 {
+          font-size: .9rem;
+          margin: .25em 0;
+        }
+
+        p {
+          margin: .25em 0;
+        }
+      }
+
+      &.dropdown-cart-subtotal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: .6rem;
+        padding: 10px 0;
+        border-top: 1px solid #ececec;
+        border-bottom: 2px solid #ececec;
+        margin: .5em 0;
+
+        .dropdown-cart-left {
+
+          h6 {
+            margin: 0;
+            margin-right: 10px;
+          }
+        }
+
+        .dropdown-cart-right {
+
+          h6 {
+            margin: 0;
+            font-weight: 700;
+            color: rgba(0,0,0,.8);
+          }
+        }
+      }
+
+      &.dropdown-cart-links {
+        display: block;
+        font-size: 1rem;
+        margin: 10px 0 0 0;
+      
+        .dropdown-checkout-link {
+          padding: 5px 0;
+          text-align: center;
+          margin-right: 0;
+          background-color: #d26e4b;
+
+          a {
+            color: #fff;
+
+            &:hover {
+              text-decoration: none;
+              color: rgba(255,255,255,.8);
+            }
+          }
+        }
+
+        .dropdown-cart-link {
+          padding: 5px 0;
+          text-align: center;
+          margin-bottom: 5px;
+          margin-right: 0;
+          background-color: #446084;
+
+          a {
+            color: #fff;
+
+            &:hover {
+              text-decoration: none;
+              color: rgba(255,255,255,.8);
+            }
+          }
+        }
+      }
+    }
   }
 }

@@ -33,20 +33,54 @@
   }
 }
 
-//footer widgets 
-.widget {
-  footer {
+//footer widgets social
+.footer-widgets {
+
+  .social-footer {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+
+.site-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+}
+
+//mailchimp
+.mc4wp-form {
+  background: $color__site-dust;
+  color: #fff;
+  font-family: $font__sans;
+
+  .mc4wp-form-fields {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2em 1em;
 
     p {
-      line-height: 1.35em;
-    }
+      margin: 0;
 
-    .linked-in {
-
-      &:hover {
+      [value="Subscribe"] {
+        padding: 15px 20px;
+        font-size: 1rem;
+        background: $color__site-red-deep;
+        color: #fff;
         border: none;
-        color: #0077b5;
-        transition: color .1s linear;
+        border-radius: 0;
+      }
+
+      label {
+        margin-right: .5em;
+        font-size: 1.5rem;
+
+        +input {
+          padding: .5em;
+          margin-right: .5em;
+          font-size: 1rem;
+        }
       }
     }
   }

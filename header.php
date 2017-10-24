@@ -23,9 +23,6 @@
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'starterpack' ); ?></a>
 
-    <?php
-    if ( is_front_page() ) : ?>
-
     <div class="header-group">
         <div class="page-header">
             <p>Free Shipping on Orders Over $30.00!</p>
@@ -55,10 +52,9 @@
                         <a class="cart-contents" href="<?php echo wc_get_cart_url(); ?>" title="<?php _e( 'View your shopping cart' ); ?>"><span class="cart-contents-count"><?php echo $item_count; ?></span></a>
                         <div class="cart-dropdown">
                             <div class="cart-dropdown-inner">
-                            <?php if ($items) { ?>
-                                <h4>Shopping Bag</h4>
+                            <?php if ($items) { 
 
-                            <?php foreach($items as $item => $values) { 
+                            foreach($items as $item => $values) { 
                                 $_product = $values['data']->post; ?>
                                 
                                 <div class="dropdown-cart-wrap">
@@ -118,8 +114,6 @@
                                     <div class="clear"></div>
                                 </div>
                             <?php } else { ?>
-                                <h4>Shopping Bag</h4>
-
                                 <div class="dropdown-cart-wrap">
                                     <p>Your cart is empty.</p>
                                 </div>
@@ -133,30 +127,8 @@
                 
             </nav><!-- #site-navigation -->
         </div>
-    </div> <?php else : ?>
-        <div class="main-navigation-wrapper">
-            <nav id="site-navigation" class="main-navigation" role="navigation">
-                <?php the_custom_logo(); ?>
-                <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><i class="fa fa-bars" aria-hidden="true"></i></button>
-                <?php wp_nav_menu( array( 'theme_location' => 'menu-1', 'menu_id' => 'primary-menu' ) ); ?>
-
-                <?php if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-        
-                    $count = WC()->cart->cart_contents_count;
-                    ?><a class="cart-contents" href="<?php echo WC()->cart->get_cart_url(); ?>" title="<?php _e( 'View your shopping cart' ); ?>"><?php 
-                    if ( $count > 0 ) {
-                        ?>
-                        <span class="cart-contents-count"><?php echo esc_html( $count ); ?></span>
-                        <?php
-                    }
-                        ?></a>
-                
-                <?php } ?>
-            </nav><!-- #site-navigation -->
-        </div>
+    </div> 
         <?php
-            endif; 
-
     if (  is_woocommerce() ) :
 
         $args = array(

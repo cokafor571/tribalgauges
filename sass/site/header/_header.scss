@@ -75,7 +75,6 @@
 
         &:hover,
         &:focus {
-          text-decoration: underline;
         }
       }
     }
@@ -90,15 +89,20 @@
       flex-direction: column;
 
       button {
-        width: 40%;
         margin: 1em auto 0;
         background: transparent;
         border: 2px solid #fff;
         letter-spacing: 1px;
-        padding: 10px;
+        padding: 15px 100px;
         font-family: $font__sans;
         font-size: .8rem;
         color: #fff;
+        transition: background .25s linear;
+
+        &:hover {
+          background: #000;
+          font-weight: 700;
+        }
       }
 
       @media screen and ( min-width: $query__small ) {

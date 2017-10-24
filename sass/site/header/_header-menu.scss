@@ -145,6 +145,7 @@
   position: relative;
   width: 180px;
   margin: 0 auto;
+  border: 1px rgba(222,222,222,0.81) solid;
 
   @media screen and ( min-width: $query__small ) {
     position: absolute;
@@ -165,16 +166,24 @@
         flex-direction: column;
         background: rgb( 255,255,255 );
         margin-left: 0;
-        top: 47px;
+        top: 44px;
 
         li {
           padding-left: 0;
+          margin: 0;
 
           a {
-            width: 218px;
+            width: inherit;
             background: none;
             margin: 0;
-            padding: 0;
+            padding: .5em 1em;
+            font-size: .9rem;
+            display: block;
+            color: $color__site-red-light;
+
+            &:hover {
+              background: rgba( 0,0,0,.1 );
+            }
           }
         }
       }

@@ -11,6 +11,26 @@
         padding: 0 1em;
         margin-bottom: 3em;
 
+        //kill messages 
+        .woocommerce-message {
+            display: none;
+        }
+
+        //minimize qty field
+        .quantity .qty {
+            width: 2em;
+        }
+
+        //cart is empty message 
+        .cart-empty {
+            margin: 1em;
+        }
+
+        .button.wc-backward {
+            color: #fff;
+            background: $color__site-red-light;
+        }
+
         .woocommerce-cart-form {
             flex-basis: 65%;
             margin-right: 1.5em;

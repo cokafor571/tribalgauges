@@ -13,6 +13,11 @@
 
     ul.products {
 
+        //remove stock on shop pages
+        p.stock {
+            display: none;
+        }
+
         li.product {
             border: 2px solid transparent;
             box-shadow: 0 2px 6px 1px rgba(0,0,0,.1);
@@ -83,6 +88,15 @@
             font-size: 1.05em;
         }
 
+        form.cart {
+            display: flex;
+            align-items: center;
+
+            .stock {
+                display: none;
+            } 
+        }
+
     }
 
     //image size
@@ -100,7 +114,7 @@
     //image summary size
     #content div.product div.summary {
         float: none;
-        width: 80%;
+        width: 100%;
     }
 
 
@@ -176,4 +190,82 @@
 
 .woocommerce .widget_price_filter .ui-slider .ui-slider-handle {
     background-color: $color__site-red-deep;
+}
+
+//social share
+.social-share-wrapper {
+    display: none;
+}
+
+.single-product {
+
+    .social-share-wrapper {
+        display: flex;
+        align-items: center;
+
+        div {
+            margin-right: .25em;
+        }
+
+        .share-on {
+            font-size: 1rem;
+        }
+
+        .facebook,
+        .twitter,
+        .pinterest,
+        .googleplus {
+            font-size: .75rem;
+            padding: .2em .45em .2em .2em;
+            border-radius: 3px;
+        }
+
+        .facebook {
+            background: #3B5998;
+
+            a {
+                color: #fff;
+            }
+
+            i {
+                padding: 0 .25em;
+            }
+        }
+
+        .twitter {
+            background: #1DA1F2;
+
+            a {
+                color: #fff;
+            }
+
+            i {
+                padding: 0 .25em;
+            }
+        }
+
+        .pinterest {
+            background: #BD081C;
+
+            a {
+                color: #fff;
+            }
+
+            i {
+                padding: 0 .25em;
+            }
+        }
+
+        .googleplus {
+            background: #DB4437;
+
+            a {
+                color: #fff;
+            }
+
+            i {
+                padding: 0 .25em;
+            }
+        }
+    }
 }

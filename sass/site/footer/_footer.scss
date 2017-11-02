@@ -39,6 +39,37 @@
   .social-footer {
     display: flex;
     justify-content: space-evenly;
+    font-size: 1.25rem;
+
+    a:hover,
+    a:focus {
+      border: none;
+      animation: rotate .5s linear;
+    }
+
+    .fa-instagram {
+      padding: .25em;
+
+        &:hover {
+          color: #bc2a8d;
+      }
+    }
+
+    .fa-facebook {
+      padding: .25em;
+
+      &:hover {
+        color: #3B5998;
+      }
+    }
+
+    .fa-pinterest {
+      padding: .25em;
+
+      &:hover {
+        color: #BD081C;
+      }
+    }
   }
 }
 
@@ -83,5 +114,11 @@
         }
       }
     }
+  }
+
+  .mc4wp-alert.mc4wp-error p {
+    text-align: center;
+    color: $color__site-red-deep;
+    margin: 0;
   }
 }

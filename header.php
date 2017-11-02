@@ -23,6 +23,7 @@
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'starterpack' ); ?></a>
 
+<div class="control-header-height">
     <div class="header-group">
         <div class="page-header">
             <p>Free Shipping on Orders Over $30.00!</p>
@@ -69,7 +70,7 @@
 
                                     <div class="dropdown-cart-right">
                                         <h5><?php echo $_product->post_title; ?></h5>
-                                        <p><strong>Quantity:</strong> <?php echo $values['quantity']; ?></p>
+                                        <p class="price-amount"><?php echo $values['quantity']; ?> <span>x</span> 
                                         <?php global $woocommerce;
                                         $currency = get_woocommerce_currency_symbol();
                                         $price = get_post_meta( $values['product_id'], '_regular_price', true);
@@ -77,9 +78,9 @@
                                         ?>
                                         
                                         <?php if($sale) { ?>
-                                            <p class="price"><strong>Price:</strong> <del><?php echo $currency; echo $price; ?></del> <?php echo $currency; echo $sale; ?></p>
+                                            <del><?php echo $currency; echo $price; ?></del> <?php echo $currency; echo $sale; ?></p>
                                         <?php } elseif($price) { ?>
-                                            <p class="price"><strong>Price:</strong> <?php echo $currency; echo $price; ?></p>    
+                                            <?php echo $currency; echo $price; ?></p>    
                                         <?php } ?>
                                     </div>
 
@@ -89,7 +90,7 @@
 
                                 <div class="dropdown-cart-wrap dropdown-cart-subtotal">
                                     <div class="dropdown-cart-left">
-                                        <h6>Subtotal</h6>
+                                        <h6>Subtotal:</h6>
                                     </div>
 
                                     <div class="dropdown-cart-right">
@@ -155,8 +156,7 @@
 
                 if ( is_front_page() ) : ?>
                     <div class="site-description">
-                        <button>SHOP</button>
-                        <button>BLOG</button>
+                        <h2>Everything Plugs, Gauges Tapers and Accessories</h2>
                     </div>
                 <?php
                 endif; ?>
@@ -165,6 +165,7 @@
 		</div><!-- .site-branding -->
 
 	</header><!-- #masthead -->
+</div>
     <?php elseif ( is_woocommerce() && ! is_single() ) : ?>
             <header class="woocommerce-products-header">
 
@@ -186,7 +187,7 @@
                 ?>
 
             </header>
+        </div>
         <?php endif; ?>
 
 	<div id="content" class="site-content">
-

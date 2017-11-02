@@ -269,32 +269,14 @@ function starterpack_widgets_init() {
 }
 add_action( 'widgets_init', 'starterpack_widgets_init' );
 
-/**
- * Ensure cart contents update when products are added to the cart via AJAX
- */
-function my_header_add_to_cart_fragment( $fragments ) {
- 
-    ob_start();
-    $count = WC()->cart->cart_contents_count;
-    ?><a class="cart-contents" href="<?php echo WC()->cart->get_cart_url(); ?>" title="<?php _e( 'View your shopping cart' ); ?>"><?php
-    if ( $count > 0 ) {
-        ?>
-        <span class="cart-contents-count"><?php echo esc_html( $count ); ?></span>
-        <?php            
-    }
-        ?></a><?php
- 
-    $fragments['a.cart-contents'] = ob_get_clean();
-     
-    return $fragments;
-}
-add_filter( 'woocommerce_add_to_cart_fragments', 'my_header_add_to_cart_fragment' );
-
 
 /**
  * Enqueue scripts and styles.
  */
 function starterpack_scripts() {
+
+    wp_enqueue_script( 'closeheader', get_template_directory_uri() . '/js/closeheader.js', array(), '20171022', true );
+	
     // Enque google fonts: 
     wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Lato:400,700' );
 
@@ -315,11 +297,20 @@ function starterpack_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
+	//move error notice on checkout page
+	global $wp_scripts; 
+	$wp_scripts->registered[ 'wc-checkout' ]->src =  get_template_directory_uri() . '/js/woocommerce/checkout.js';
+
     wp_enqueue_script( 'scrollnav', get_template_directory_uri() . '/js/scrollnav.js', array(), '20171022', true );
 
     wp_enqueue_script( 'scrolltoelement', get_template_directory_uri() . '/js/scrolltoelement.js', array(), '20171022', true );
+	
+    wp_enqueue_script( 'imgborder', get_template_directory_uri() . '/js/imgborder.js', array(), '20171022', true );
 
+    wp_enqueue_script( 'hovercartdropdown', get_template_directory_uri() . '/js/hovercartdropdown.js', array(), '20171022', true );
+	
     wp_enqueue_script( 'addviewcart', get_template_directory_uri() . '/js/addviewcart.js', array(), '20171022', true );
+
     wp_localize_script( 'addviewcart', 'starterpack_ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 
     wp_enqueue_style( 'fa-icons', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' );
@@ -390,8 +381,9 @@ function remove_wc_breadcrumbs() {
 }
 add_action( 'init', 'remove_wc_breadcrumbs' );
 
+
 /**
- * custom_woocommerce_template_loop_add_to_cart
+ * custom_woocommerce_template_loop_add_to_cart text
 */
 function custom_woocommerce_product_add_to_cart_text() {
 	global $product;
@@ -418,10 +410,12 @@ function custom_woocommerce_product_add_to_cart_text() {
 }
 add_filter( 'woocommerce_product_add_to_cart_text' , 'custom_woocommerce_product_add_to_cart_text' );
 
-/* Remove product meta */
+
+/* Remove single product meta */
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
 
-//+/- finctionality add to cart
+
+//+/- finctionality add to cart single product page
 function kia_add_script_to_footer(){
     if( ! is_admin() ) { ?>
     <script>
@@ -443,109 +437,142 @@ function kia_add_script_to_footer(){
             $input.val( val - step ).change();
         } 
     });
-});
-</script>
-<?php }
+	});
+	</script>
+	<?php }
 }
 add_action( 'wp_footer', 'kia_add_script_to_footer' );
 
+
+
+/**
+ * Ensure cart contents update when products are added to the cart via AJAX
+ */
+function my_header_add_to_cart_fragment( $fragments ) {
+ 
+    ob_start();
+    $count = WC()->cart->cart_contents_count;
+    ?><a class="cart-contents" href="<?php echo WC()->cart->get_cart_url(); ?>" title="<?php _e( 'View your shopping cart' ); ?>"><?php
+    if ( $count > 0 ) {
+        ?>
+        <span class="cart-contents-count"><?php echo esc_html( $count ); ?></span>
+        <?php            
+    }
+        ?></a><?php
+ 
+    $fragments['a.cart-contents'] = ob_get_clean();
+     
+    return $fragments;
+}
+add_filter( 'woocommerce_add_to_cart_fragments', 'my_header_add_to_cart_fragment' );
+
+
 /* 
-** Add to cart ajax on single product page */
+** Add to cart ajax on single product page
+*/
 function add_custom_loop_add_to_cart() {
 
-global $product;
+	global $product;
 
-if ( ! $product->is_purchasable() ) {
-	return;
-}
+	if ( ! $product->is_purchasable() ) {
+		return;
+	}
 
-echo wc_get_stock_html( $product );
+	echo wc_get_stock_html( $product );
 
-if ( $product->is_in_stock() ) :
+	if ( $product->is_in_stock() ) :
 
-	do_action( 'woocommerce_before_add_to_cart_form' ); ?>
+		do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
-	<form class="cart" method="post" enctype='multipart/form-data'>
-		<?php
-			/**
-			 * @since 2.1.0.
-			 */
-			do_action( 'woocommerce_before_add_to_cart_button' );
+		<form class="cart" method="post" enctype='multipart/form-data'>
+			<?php
+				/**
+				* @since 2.1.0.
+				*/
+				do_action( 'woocommerce_before_add_to_cart_button' );
 
-			/**
-			 * @since 3.0.0.
-			 */
-			do_action( 'woocommerce_before_add_to_cart_quantity' );
+				/**
+				* @since 3.0.0.
+				*/
+				do_action( 'woocommerce_before_add_to_cart_quantity' );
 
-			woocommerce_quantity_input( array(
-				'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
-				'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $product->get_max_purchase_quantity(), $product ),
-				'input_value' => isset( $_POST['quantity'] ) ? wc_stock_amount( $_POST['quantity'] ) : $product->get_min_purchase_quantity(),
-			) );
+				?>
+				<script>
+				jQuery(function($) {
+				$("form.cart").on("change", "input.qty", function() {
+					$(this.form).find("button[data-quantity]").data("quantity", this.value);
+				});
+				$(document.body).on("adding_to_cart", function() {
+					$("a.added_to_cart").remove();
+				});
+				});
+				</script>
+				<?php
 
-			/**
-			 * @since 3.0.0.
-			 */
-			do_action( 'woocommerce_after_add_to_cart_quantity' );
+				/**
+				* @since 3.0.0.
+				*/
+				do_action( 'woocommerce_after_add_to_cart_quantity' );
 
-			woocommerce_template_loop_add_to_cart();
+				woocommerce_template_loop_add_to_cart();
 
-			/**
-			 * @since 2.1.0.
-			 */
-			do_action( 'woocommerce_after_add_to_cart_button' );
-		?>
-	</form>
+				/**
+				* @since 2.1.0.
+				*/
+				do_action( 'woocommerce_after_add_to_cart_button' );
+			?>
+		</form>
 
-	<?php do_action( 'woocommerce_after_add_to_cart_form' ); ?>
-
-<?php endif; 
+	<?php endif; 
 	
 }
 
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
 add_action( 'woocommerce_single_product_summary', 'add_custom_loop_add_to_cart', 30 );
-
+add_filter('woocommerce_loop_add_to_cart_link', 'custom_woo_loop_add_to_cart_link', 10, 2);
 
 
 /*
-** Add to cart ajax
+** Add to cart ajax woocommerce store
 */
 function starterpack_add_cart_ajax() {
 	$prodID = $_POST['prodID'];
+	$quantity = $_POST['quantity'];
+	$variation_id = $_POST['variation_id'];
 
-	WC()->cart->add_to_cart($prodID);
+	if ($variation_id) {
+        WC()->cart->add_to_cart( $prodID, $quantity, $variation_id );
+    } else {
+        WC()->cart->add_to_cart( $prodID, $quantity);
+    }
 
-	$items = WC()->cart->get_cart();
-	$item_count = count($items); ?>
-
-	<?php foreach($items as $item => $values) { 
-		$_product = $values['data']->post; ?>
+	    foreach( WC()->cart->get_cart() as $cart_item_key => $cart_item ) { 
+		$_product = $cart_item['data']->post; ?>
 		
 		<div class="dropdown-cart-wrap">
 			<div class="dropdown-cart-left">
 				<!-- Checks whether the product is a variation, then display the variation image. -->
-				<?php $variation = $values['variation_id'];
+				<?php $variation = $cart_item['variation_id'];
 				if ($variation) {
-					echo get_the_post_thumbnail( $values['variation_id'], 'thumbnail' ); 
+					echo get_the_post_thumbnail( $cart_item['variation_id'], 'thumbnail' ); 
 				} else {
-					echo get_the_post_thumbnail( $values['product_id'], 'thumbnail' ); 
+					echo get_the_post_thumbnail( $cart_item['product_id'], 'thumbnail' ); 
 				} ?>
 			</div>
 
 			<div class="dropdown-cart-right">
 				<h5><?php echo $_product->post_title; ?></h5>
-				<p><strong>Quantity:</strong> <?php echo $values['quantity']; ?></p>
+				<p class="price-amount"><?php echo $cart_item['quantity']; ?> <span>x</span>
 				<?php global $woocommerce;
 				$currency = get_woocommerce_currency_symbol();
-				$price = get_post_meta( $values['product_id'], '_regular_price', true);
-				$sale = get_post_meta( $values['product_id'], '_sale_price', true);
+				$price = get_post_meta( $cart_item['product_id'], '_regular_price', true);
+				$sale = get_post_meta( $cart_item['product_id'], '_sale_price', true);
 				?>
 				 
 				<?php if($sale) { ?>
-					<p class="price"><strong>Price:</strong> <del><?php echo $currency; echo $price; ?></del> <?php echo $currency; echo $sale; ?></p>
+					<del><?php echo $currency; echo $price; ?></del> <?php echo $currency; echo $sale; ?></p>
 				<?php } elseif($price) { ?>
-					<p class="price"><strong>Price:</strong> <?php echo $currency; echo $price; ?></p>    
+					<?php echo $currency; echo $price; ?></p>    
 				<?php } ?>
 			</div>
 
@@ -585,3 +612,66 @@ function starterpack_add_cart_ajax() {
 
 add_action('wp_ajax_starterpack_add_cart', 'starterpack_add_cart_ajax');
 add_action('wp_ajax_nopriv_starterpack_add_cart', 'starterpack_add_cart_ajax');
+
+
+// more products per page
+function new_loop_shop_per_page( $cols ) {
+  // $cols contains the current number of products per page based on the value stored on Options -> Reading
+  // Return the number of products you wanna show per page.
+  $cols = 20;
+  return $cols;
+}
+add_filter( 'loop_shop_per_page', 'new_loop_shop_per_page', 20 );
+
+
+// add quantity buttons to shop page and update cart
+/*function custom_woo_before_shop_link() {
+    add_filter('woocommerce_loop_add_to_cart_link', 'custom_woo_loop_add_to_cart_link', 10, 2);
+    add_action('woocommerce_after_shop_loop', 'custom_woo_after_shop_loop');
+}
+add_action('woocommerce_before_shop_loop', 'custom_woo_before_shop_link'); */
+
+
+/**
+* customise Add to Cart link/button for product loop
+* @param string $button
+* @param object $product
+* @return string
+*/
+function custom_woo_loop_add_to_cart_link($button, $product) {
+    // not for variable, grouped or external products
+    if (!in_array($product->product_type, array('variable', 'grouped', 'external'))) {
+        // only if can be purchased
+        if ($product->is_purchasable()) {
+            // show qty +/- with button
+            ob_start();
+            woocommerce_simple_add_to_cart();
+            $button = ob_get_clean();
+            // modify button so that AJAX add-to-cart script finds it
+            $replacement = sprintf('data-product_id="%d" data-quantity="1" $1 ajax_add_to_cart add_to_cart_button product_type_simple ', $product->id);
+            $button = preg_replace('/(class="single_add_to_cart_button)/', $replacement, $button);
+        }
+    }
+    return $button;
+}
+
+
+/**
+* add the required JavaScript
+*/
+function custom_woo_after_shop_loop() {
+    ?>
+
+    <script>
+    jQuery(function($) {
+    $("form.cart").on("change", "input.qty", function() {
+        $(this.form).find("button[data-quantity]").data("quantity", this.value);
+    });
+    $(document.body).on("adding_to_cart", function() {
+        $("a.added_to_cart").remove();
+    });
+    });
+    </script>
+
+    <?php
+}

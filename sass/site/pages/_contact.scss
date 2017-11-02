@@ -1,0 +1,76 @@
+.page-id-74248 .site-content {
+    background: #f5f5f5;
+}
+
+.contact-us {
+    display: flex;
+    color: rgba(0,0,0,.8);
+
+    .nnja-form {
+        flex: 2;
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        label {
+            font-size: 1rem;
+        }
+
+        .nf-form-fields-required {
+            display: none;
+        }
+
+        .nf-form-cont {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .nf-field-element textarea {
+            height: 100px;
+        }
+
+        .submit-container .submit-wrap {
+
+            input {
+                background: $color__site-red-deep;
+                font-size: 1.1rem;
+                color: #fff;
+                padding: 12px 24px;
+            }
+        }
+    }
+
+    .contact-info {
+        flex: 1;
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1em;
+        }
+
+        p {
+            font-size: 1.05rem;
+            margin: 0;
+        }
+
+        .social-connect {
+            margin: 2em 0 1em;
+            font-family: $font__sans;
+            font-weight: 700;
+
+            p {
+                font-size: 1.5rem;
+            }
+
+            .social-icons {
+                display: flex;
+                margin-top: .5em;
+
+                a {
+                    margin-right: 1em;
+                }
+            }
+        }
+    }
+}

@@ -26,17 +26,17 @@
 				<div class="cart-checkout-header">
 					<a class="active" href="/cart">Shopping Cart</a>
 					<i class="fa fa-angle-right" aria-hidden="true"></i>
-					<a class="" href="/checkout">Checkout Details</a>
+					<a href="/checkout">Checkout Details</a>
 					<i class="fa fa-angle-right" aria-hidden="true"></i>
-					<a class="" href="">Order Complete</a>
+					<span>Order Complete</span>
 				</div>		
 			<?php elseif ( !is_cart() && is_checkout() ) : ?>
 				<div class="cart-checkout-header">
-					<a class="" href="/cart">Shopping Cart</a>
+					<a class="active" href="/cart">Shopping Cart</a>
 					<i class="fa fa-angle-right" aria-hidden="true"></i>
 					<a class="active" href="/checkout">Checkout Details</a>
 					<i class="fa fa-angle-right" aria-hidden="true"></i>
-					<a class="" href="">Order Complete</a>
+					<span>Order Complete</span>
 				</div>	
 			<?php endif;
 

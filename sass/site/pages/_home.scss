@@ -1,141 +1,188 @@
-// gauges and fake gauges
-.gauges,
-.fake-gauges {
+//intro 
+.intro {
+    color: rgba(0,0,0,.7);
+    margin-top: 2em;
     opacity: 0;
+    transition: opacity 1.25s ease-in-out;
 
-    h1 {
-        text-align: center;
-        font-size: 1.75rem;
-        margin-bottom: 2em;
-
-        @include title-uline( $line-color: rgba(0,0,0,.9), $line-width: 60px );
+    &.animate-element {
+        opacity: 1;
     }
 
-    .gauge-types,
-    .fake-gauge-types {
-        max-width: 1280px;
-        display: flex;
-        position: relative;
-        margin: 0 auto 2em;
+    h1 {
+        font-size: 1.4rem;
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+        font-weight: 400;
+    }
 
-        .plugs-gauges,
-        .spirals-tapers-gauges,
-        .tunnels-gauges,
-        .fake-spiral-tapers-gauges,
-        .fake-hanging-woods-gauges,
-        .fake-plug-gauges {
+    .info-buttons {
+        display: flex;
+        margin: 2em 0 4em;
+
+        .btn-block {
+            display: block;
             margin: 0 auto;
 
-            .plugs-img,
-            .spirals-tapers-img,
-            .tunnels-img,
-            .fake-plugs-img,
-            .fake-hanging-woods-img,
-            .fake-plug-img {
-                position: relative;
-                z-index: 0;
-                @include dark-background;
+            button {
+                margin: 1em;
+                background: transparent;
+                border: 2px solid #303030;
+                letter-spacing: 1px;
+                padding: 15px 100px;
+                font-family: $font__sans;
+                font-size: .9rem;
+                color: #303030;
+                transition: all .25s linear;
+
+                &:hover {
+                    background: #303030;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+
+// gauges and fake gauges
+.gauge-imgs {
+
+    ul {
+        display: flex;
+        padding: 0;
+        margin: 0;
+        flex-wrap: wrap;
+
+        li {
+            position: relative;
+            list-style: none;
+            min-width: 400px;
+            flex: 1;
+            margin: 0 1px 1px 0;
+            overflow: hidden;
+
+            @include dark-background-invisible;
+
+            &:hover {
+
+                &:before {
+                    opacity: 1;
+                }
+
+                img {
+                    transform: scale(1.1);
+                }
             }
 
             img {
                 max-width: 100%;
                 height: auto;
                 display: block;
+                transition: all .2s linear;
             }
 
-            button {
-                color: #fff;
-                padding: 10px 15px;
-                border: 2px solid #fff;
-                background: transparent;
-                position: relative;
-                z-index: 2;
-                top: -70px;
-                display: block;
-                margin: 0 auto;
-                transition: background .25s linear;
+            .btb,
+            .btr,
+            .bbl,
+            .bbt {
+                position: absolute;
+                z-index: 1;
+                background-color: $color__site-red-light;
+            }
 
-                &:hover {
-                    background: #000;
-                    font-weight: 700;
-                }
+            .btb {
+                width: 2px;
+                height: 0;
+                top: 0;
+                left: 0;
+            }
 
-                h2 {
-                    font-size: 1rem;
-                    font-weight: bold;
-                    margin: 0;
-                    padding: 5px 10px;
-                }
+            .btr {
+                width: 0;
+                height: 2px;
+                left: 0;
+                top: 0;
+            }
+
+            .bbt {
+                width: 2px;
+                height: 0;
+                bottom: 0;
+                right: 0;
+            }
+
+            .bbl {
+                height: 2px;
+                width: 0;
+                bottom: 0;
+                right: 0;
             }
         }
-    }    
-}
-
-//animate gauges
-.gauges {
-    
-    &.animate-element {
-        animation: translateLeft 1s ease-out both, appear 1s linear both;
     }
 }
 
-.fake-gauges {
-    
-    &.animate-element {
-        animation: translateRight 1s ease-out both, appear 1s linear both;
-    }
-}
+//imgs overlay
+.gauge-imgs {
 
-//free bag and piercing divides
-.free-bag,
-.piercing-care {
-    display: flex;
-    background: url( 'http://tribalgauges.dev/wp-content/uploads/2017/10/ricepaper-bg.png' ) repeat center center;
-    padding: 1em;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 3em;
-
-    .piercing-scale {
-        display: flex;
-        align-items: center;
-        color: #777;
+    .imgwrapper {
 
         &:hover {
-            
-            img {
-                transform: scale(1.1);
+
+            .overlay-text {
+                opacity: 1;
+
+                a {
+
+                    &:hover {
+                        color: #fff;
+                        border-color: #fff;
+                        transform: scale(1.2);
+                    }
+                }
+            }
+        }
+
+        .overlay-text {
+            position: absolute;
+            z-index: 2;
+            top: 40%;
+            color: #fff;
+            opacity: 0;
+            transition: all .25s linear;
+            text-align: center;
+            width: 100%;
+
+            h2 {
+                font-size: 1.5rem;
+                margin: 0 0 1em;
+            }
+
+            a {
+                color: rgba( 255,255,255,.8 );
+                font-family: $font__sans;
+                font-size: 1rem;
+                padding: 8px 16px;
+                background: transparent;
+                border: 2px solid rgba( 255,255,255,.8 );
+                transition: all .5s cubic-bezier(.47,2.02,.31,-0.36);
+                font-size: 1rem;
+                display: inline-block;
             }
         }
     }
-        
-    h2 {
-        font-size: 1.25rem;
-        margin: 0 1.5em;
-    }
-
-    img {
-        max-width: 100%;
-        height: auto;
-        transition: transform .25s linear;
-    }
-}
-
-.piercing-care {
-    background: url( 'http://tribalgauges.dev/wp-content/uploads/2017/10/green_dust_scratch.png' ) repeat center center;
 }
 
 //accessories
 .accessories-block {
     display: flex;
+    padding-top: 1em;
     max-width: 1280px;
     margin: 0 auto;
-    opacity: 0;
     align-items: center;
-    margin-bottom: 3em;
 
     &.animate-element {
-        animation: appear 1s linear both;
+        animation: appear 1.25s linear both;
     }
 
     img {
@@ -145,28 +192,31 @@
 
     .accessories {
         margin: 0 auto;
+        text-align: center;
 
         h2 {
-            font-size: 1.35rem;
+            font-size: 2rem;
+            text-align: center;
+            color: rgba(0,0,0,.8);
             @include title-uline( $line-width: 60px );
             margin: 0 0 1em;
-
-            &:after {
-                margin: 0;
-            }
         }
 
         p {
-            font-size: 1.1rem;
+            font-size: 1.25rem;
             color: rgba(0,0,0,.8);
         }
 
-        button {
+        a {
             background: $color__site-red-deep;
             color: #fff;
-            font-size: 1.1rem;
-            padding: 10px 15px;
+            font-size: 1.25rem;
+            padding: 10px 25px;
+            border: none;
             transition: transform .3s linear;
+            display: inline-block;
+            font-family: $font__sans;
+            border-radius: 3px;
 
             &:hover {
                 transform: scale(1.1);
@@ -174,3 +224,143 @@
         }
     }
 }
+
+//affiliates
+.affiliates {
+    color: rgba(0,0,0,.7);
+    background: linear-gradient(150deg, #4AC29A 35%, #BDFFF3 100%);
+
+    h2 {
+        font-size: 1.5rem;
+        text-align: center;
+        margin: 0;
+        padding: 1em 0 0;
+    }
+
+    ul {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            margin: 1em;
+        }
+    }
+}
+
+//events bag piercing
+.events-free-piercing {
+    display: flex;
+
+    .events {
+        flex: 1;
+        color: rgba(0,0,0,.7);
+        text-align: center;
+
+        h2 {
+            font-size: 1.5rem;
+            word-spacing: .15em;
+        }
+
+        p {
+            font-size: 1.1rem;
+        }
+
+        a {
+            display: inline-block;
+
+            &:hover {
+
+                img {
+                    opacity: .85;
+                }
+            }
+
+            img {
+                transform: scale(.8);
+                transition: opacity .2s linear
+            }
+        }
+
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            list-style: none;
+
+            li {
+                margin: 2em 10px;
+            }
+        }
+    }
+
+    //free bag and piercing divides
+    .free-bag-and-care {
+        display: flex;
+        overflow: hidden;
+        flex: 1;
+        background: linear-gradient(150deg,#f5debc 40%, #c9e8a3 100%);
+    }
+
+    .free-bag {
+        display: flex;
+        flex-direction: column;
+        padding: 2em 1em;
+        align-items: center;
+        flex: 1;
+
+        h2 {
+            font-size: 1.25rem;
+            text-align: center;
+            margin: 1em 0;
+            color: rgba( 0,0,0,.7 );
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            transition: transform .25s linear;
+        }
+    }
+    
+    .piercing-care {
+        padding: 1em;
+        flex: 1;
+        justify-content: center;
+        display: flex;
+        align-items: flex-end;
+
+        .piercing-scale {
+            display: flex;
+            align-items: center;
+            color: #777;
+            flex-direction: column-reverse;
+            padding-bottom: 1em;
+
+            &:hover {
+                
+                img {
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+        
+    h2 {
+        font-size: 1.25rem;
+        text-align: center;
+        margin: 1em 0;
+        color: rgba( 0,0,0,.7 );
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        transition: transform .25s linear;
+    }
+}
+

@@ -16,15 +16,25 @@
 
         container.find( '.menu-item-has-children > a, .page_item_has_children > a' ).after( dropdownToggle );
 
+        // Listen for clicks outside of menu
+        $('body').on('click', function (e) {
+            if (!$('li.menu-item-has-children').is(e.target) && $('li.menu-item-has-children').has(e.target).length === 0 && $('.toggled-on').has(e.target).length === 0) {
+                $('li.menu-item-has-children, .dropdown-symbol + .sub-menu').removeClass('toggled-on');
+            }
+        });
+
         if ( $(window).width() < 600 ) {
         
-            container.find( '.menu-item-has-children > a' ).click( function( e ) {
-                var _this = $( '.menu-item-has-children' ),
+            container.find( '.menu-item-has-children > a, .menu-item-has-children > span' ).click( function( e ) {
+                var _this = $(this).parent( '.menu-item-has-children' ),
                     screenReaderSpan = _this.find( '.screen-reader-text' );
                     dropdownSymbol = _this.find( '.dropdown-symbol' );
                     dropdownSymbol.html( dropdownSymbol.html() === '<i class="fa fa-angle-right" aria-hidden="true"></i>' ? '<i class="fa fa-angle-down" aria-hidden="true">' : '<i class="fa fa-angle-right" aria-hidden="true"></i>' );
 
                 e.preventDefault();
+
+                //$('li.menu-item-has-children, .dropdown-symbol + .sub-menu').removeClass('toggled-on');
+                
                 _this.toggleClass( 'toggled-on' );
                 _this.find( '.dropdown-symbol + .sub-menu' ).toggleClass( 'toggled-on' );
 
@@ -34,13 +44,16 @@
             });
         } else {
             
-            container.find( '.menu-item-has-children' ).click( function( e ) {
-                var _this = $( this ),
+            container.find( '.menu-item-has-children > a, .menu-item-has-children > span' ).click( function( e ) {
+                var _this = $(this).parent( '.menu-item-has-children' ),
                     screenReaderSpan = _this.find( '.screen-reader-text' );
                     dropdownSymbol = _this.find( '.dropdown-symbol' );
                     dropdownSymbol.html( dropdownSymbol.html() === '<i class="fa fa-angle-right" aria-hidden="true"></i>' ? '<i class="fa fa-angle-down" aria-hidden="true">' : '<i class="fa fa-angle-right" aria-hidden="true"></i>' );
 
                 e.preventDefault();
+
+                //$('li.menu-item-has-children, .dropdown-symbol + .sub-menu').removeClass('toggled-on');
+                
                 _this.toggleClass( 'toggled-on' );
                 _this.find( '.dropdown-symbol + .sub-menu' ).toggleClass( 'toggled-on' );
 

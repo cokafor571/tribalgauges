@@ -310,7 +310,7 @@ h5 {
 }
 
 h6 {
-	font-size: 1.6em;
+	font-size: 1.25em;
 }
 
 p {
@@ -882,11 +882,6 @@ input:focus {
 		    -ms-flex-direction: row-reverse;
 		        flex-direction: row-reverse;
 	}
-	.page:not(.has-page-sidebar) .hentry {
-		-webkit-box-pack: end;
-		    -ms-flex-pack: end;
-		        justify-content: flex-end;
-	}
 }
 
 @media screen and (min-width: 900px) {
@@ -930,30 +925,30 @@ input:focus {
 
 @-webkit-keyframes translateLeft {
 	0% {
-		-webkit-transform: translateX(300px);
-		        transform: translateX(300px);
+		-webkit-transform: translate3d(100%, 0, 0);
+		        transform: translate3d(100%, 0, 0);
 	}
 	100% {
-		-webkit-transform: translateY(0);
-		        transform: translateY(0);
+		-webkit-transform: none;
+		        transform: none;
 	}
 }
 
 @keyframes translateLeft {
 	0% {
-		-webkit-transform: translateX(300px);
-		        transform: translateX(300px);
+		-webkit-transform: translate3d(100%, 0, 0);
+		        transform: translate3d(100%, 0, 0);
 	}
 	100% {
-		-webkit-transform: translateY(0);
-		        transform: translateY(0);
+		-webkit-transform: none;
+		        transform: none;
 	}
 }
 
 @-webkit-keyframes translateRight {
 	0% {
-		-webkit-transform: translateX(-300px);
-		        transform: translateX(-300px);
+		-webkit-transform: translate3d(-100%, 0, 0);
+		        transform: translate3d(-100%, 0, 0);
 	}
 	100% {
 		-webkit-transform: translateY(0);
@@ -963,8 +958,8 @@ input:focus {
 
 @keyframes translateRight {
 	0% {
-		-webkit-transform: translateX(-300px);
-		        transform: translateX(-300px);
+		-webkit-transform: translate3d(-100%, 0, 0);
+		        transform: translate3d(-100%, 0, 0);
 	}
 	100% {
 		-webkit-transform: translateY(0);
@@ -990,33 +985,69 @@ input:focus {
 	}
 }
 
+@-webkit-keyframes rotate {
+	0% {
+		-webkit-transform: rotate(0deg);
+		        transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		        transform: rotate(360deg);
+	}
+}
+
+@keyframes rotate {
+	0% {
+		-webkit-transform: rotate(0deg);
+		        transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		        transform: rotate(360deg);
+	}
+}
+
 /*--------------------------------------------------------------
 ## Header
 --------------------------------------------------------------*/
-.header-image {
+.control-header-height {
+	height: 100%;
+	max-height: 100vh;
+	position: relative;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	transition: -webkit-transform .35s linear;
+	transition: transform .35s linear;
+	transition: transform .35s linear, -webkit-transform .35s linear;
+}
+
+.control-header-height.transform-header {
+	-webkit-transform: translate3d(0, -40px, 0);
+	        transform: translate3d(0, -40px, 0);
+}
+
+.control-header-height.trip-header .page-header {
+	display: none;
+}
+
+.site-header {
 	max-height: 100vh;
 	overflow: hidden;
 	position: relative;
-	-webkit-box-flex: 7;
-	    -ms-flex: 7;
-	        flex: 7;
+	background: url("http://tribalgauges.dev/wp-content/uploads/2014/10/Black-Spirals.jpg") no-repeat;
+	background-size: cover;
+	background-position: 30% 70%;
 }
 
-.header-image:before {
-	content: '';
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.25);
-	display: block;
-	z-index: 1;
-}
-
-.header-image img {
-	width: 100vw;
-	display: block;
+.header-image {
+	height: 56vh;
+	overflow: hidden;
+	position: relative;
 }
 
 .header-group {
@@ -1050,15 +1081,16 @@ input:focus {
 		position: relative;
 		cursor: pointer;
 		font-size: 1.1rem;
+		text-shadow: 1px 1px #444040;
 	}
 }
 
 .site-branding {
+	height: 40vh;
 	min-height: 65px;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	max-width: 500px;
+	position: relative;
+	padding: 2em;
+	z-index: 1;
 	font-family: "Times New Roman", Georgia, Cambria, Times, serif;
 }
 
@@ -1075,11 +1107,11 @@ input:focus {
 	        justify-content: center;
 	width: 100%;
 	text-align: center;
-	text-shadow: 1px 1px #444040;
+	text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 .site-branding .site-branding-text .site-title {
-	margin: 0;
+	margin: 0 0 .2em;
 	padding: 0;
 	font-size: 1.25rem;
 	font-weight: 700;
@@ -1088,66 +1120,29 @@ input:focus {
 
 @media screen and (min-width: 600px) {
 	.site-branding .site-branding-text .site-title {
-		font-size: 2rem;
+		font-size: 3.5rem;
+		letter-spacing: 1px;
+		word-spacing: .025em;
 	}
 }
 
 .site-branding .site-branding-text .site-title a {
-	color: rgba(255, 255, 255, 0.9);
+	color: white;
 	text-decoration: none;
 }
 
 .site-branding .site-branding-text .site-description {
 	margin: 0;
-	font-size: .8rem;
 	font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
 	font-weight: 400;
-	padding: 0 1em;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	    -ms-flex-direction: column;
-	        flex-direction: column;
-}
-
-.site-branding .site-branding-text .site-description button {
-	margin: 1em auto 0;
-	background: transparent;
-	border: 2px solid #fff;
-	letter-spacing: 1px;
-	padding: 15px 100px;
-	font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
-	font-size: .8rem;
 	color: #fff;
-	transition: background .25s linear;
+	text-transform: uppercase;
 }
 
-.site-branding .site-branding-text .site-description button:hover {
-	background: #000;
-	font-weight: 700;
-}
-
-@media screen and (min-width: 600px) {
-	.site-branding .site-branding-text .site-description {
-		font-size: 1.05rem;
-		padding: 1em;
-	}
-}
-
-@media screen and (min-width: 900px) {
-	.site-header {
-		display: -webkit-box;
-		display: -ms-flexbox;
-		display: flex;
-	}
-	.site-branding {
-		background: #959492;
-		-webkit-box-flex: 3;
-		    -ms-flex: 3;
-		        flex: 3;
-	}
+.site-branding .site-branding-text .site-description h2 {
+	font-size: 1.25rem;
+	word-spacing: .3em;
+	letter-spacing: .1em;
 }
 
 /*
@@ -1165,7 +1160,7 @@ Header Menu
 	display: -ms-flexbox;
 	display: flex;
 	z-index: 2;
-	font-size: 1rem;
+	border-bottom: 1px solid #f6f6f6;
 }
 
 .main-navigation.fixed-nav {
@@ -1208,7 +1203,6 @@ Header Menu
 @media screen and (min-width: 600px) {
 	.main-navigation {
 		top: 40px;
-		font-size: 1.05rem;
 		font-weight: bold;
 		-webkit-box-align: center;
 		    -ms-flex-align: center;
@@ -1220,6 +1214,7 @@ Header Menu
 	-webkit-box-flex: 2;
 	    -ms-flex: 2;
 	        flex: 2;
+	height: 100%;
 }
 
 @media screen and (max-width: 600px) {
@@ -1272,11 +1267,6 @@ Header Menu
 	color: #42413D;
 }
 
-.main-navigation a:hover,
-.main-navigation a:focus {
-	color: #c53024;
-}
-
 .dropdown-symbol {
 	color: #42413D;
 }
@@ -1304,6 +1294,7 @@ Header Menu
 	width: 180px;
 	margin: 0 auto;
 	border: 1px rgba(222, 222, 222, 0.81) solid;
+	height: auto;
 }
 
 @media screen and (min-width: 600px) {
@@ -1321,6 +1312,7 @@ Header Menu
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
+		font-size: 1rem;
 	}
 	.main-navigation ul ul {
 		-webkit-box-orient: vertical;
@@ -1329,26 +1321,33 @@ Header Menu
 		        flex-direction: column;
 		background: white;
 		margin-left: 0;
-		top: 44px;
+		top: 64px;
 	}
 	.main-navigation ul ul li {
 		padding-left: 0;
 		margin: 0;
 	}
 	.main-navigation ul ul li a {
-		width: inherit;
 		background: none;
 		margin: 0;
 		padding: .5em 1em;
-		font-size: .9rem;
 		display: block;
-		color: #e0474c;
 	}
 	.main-navigation ul ul li a:hover {
-		background: rgba(0, 0, 0, 0.1);
+		color: #e0474c;
 	}
 	.main-navigation ul li {
-		margin: 0 1em;
+		margin: 0 .75em;
+		height: 100%;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-align: center;
+		    -ms-flex-align: center;
+		        align-items: center;
+	}
+	.main-navigation ul li:hover {
+		background: rgba(0, 0, 0, 0.1);
 	}
 	.main-navigation ul li a {
 		padding: .4em .5em;
@@ -1366,6 +1365,10 @@ Header Menu
 		-webkit-box-pack: center;
 		    -ms-flex-pack: center;
 		        justify-content: center;
+		height: 100%;
+		-webkit-box-align: center;
+		    -ms-flex-align: center;
+		        align-items: center;
 	}
 }
 
@@ -1421,6 +1424,9 @@ Header Menu
 	line-height: 1;
 	font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
 	vertical-align: top;
+	position: relative;
+	right: 30%;
+	font-size: .8rem;
 }
 
 .secondary-cart {
@@ -1466,7 +1472,7 @@ Header Menu
 .secondary-cart .cart-dropdown {
 	position: absolute;
 	min-width: 260px;
-	padding: 1em .5em;
+	padding: 1em .5em .5em;
 	background: #fff;
 	box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.15);
 	border: 2px solid #ddd;
@@ -1505,12 +1511,21 @@ Header Menu
 }
 
 .secondary-cart .cart-dropdown .dropdown-cart-wrap .dropdown-cart-right h5 {
-	font-size: .9rem;
+	font-size: .8rem;
 	margin: .25em 0;
 }
 
 .secondary-cart .cart-dropdown .dropdown-cart-wrap .dropdown-cart-right p {
 	margin: .25em 0;
+}
+
+.secondary-cart .cart-dropdown .dropdown-cart-wrap .dropdown-cart-right .price-amount {
+	color: rgba(0, 0, 0, 0.4);
+	font-size: .8rem;
+}
+
+.secondary-cart .cart-dropdown .dropdown-cart-wrap .dropdown-cart-right .price-amount span {
+	padding: 0 .15em;
 }
 
 .secondary-cart .cart-dropdown .dropdown-cart-wrap.dropdown-cart-subtotal {
@@ -1533,12 +1548,14 @@ Header Menu
 .secondary-cart .cart-dropdown .dropdown-cart-wrap.dropdown-cart-subtotal .dropdown-cart-left h6 {
 	margin: 0;
 	margin-right: 10px;
+	font-size: 1rem;
 }
 
 .secondary-cart .cart-dropdown .dropdown-cart-wrap.dropdown-cart-subtotal .dropdown-cart-right h6 {
 	margin: 0;
 	font-weight: 700;
 	color: rgba(0, 0, 0, 0.8);
+	font-size: 1rem;
 }
 
 .secondary-cart .cart-dropdown .dropdown-cart-wrap.dropdown-cart-links {
@@ -1548,7 +1565,6 @@ Header Menu
 }
 
 .secondary-cart .cart-dropdown .dropdown-cart-wrap.dropdown-cart-links .dropdown-checkout-link {
-	padding: 5px 0;
 	text-align: center;
 	margin-right: 0;
 	background-color: #d26e4b;
@@ -1556,6 +1572,8 @@ Header Menu
 
 .secondary-cart .cart-dropdown .dropdown-cart-wrap.dropdown-cart-links .dropdown-checkout-link a {
 	color: #fff;
+	padding: 5px 0;
+	display: block;
 }
 
 .secondary-cart .cart-dropdown .dropdown-cart-wrap.dropdown-cart-links .dropdown-checkout-link a:hover {
@@ -1564,7 +1582,6 @@ Header Menu
 }
 
 .secondary-cart .cart-dropdown .dropdown-cart-wrap.dropdown-cart-links .dropdown-cart-link {
-	padding: 5px 0;
 	text-align: center;
 	margin-bottom: 5px;
 	margin-right: 0;
@@ -1573,6 +1590,8 @@ Header Menu
 
 .secondary-cart .cart-dropdown .dropdown-cart-wrap.dropdown-cart-links .dropdown-cart-link a {
 	color: #fff;
+	padding: 5px 0;
+	display: block;
 }
 
 .secondary-cart .cart-dropdown .dropdown-cart-wrap.dropdown-cart-links .dropdown-cart-link a:hover {
@@ -1583,573 +1602,196 @@ Header Menu
 /*--------------------------------------------------------------
 ## Pages
 --------------------------------------------------------------*/
-.gauges,
-.fake-gauges {
+.intro {
+	color: rgba(0, 0, 0, 0.7);
+	margin-top: 2em;
 	opacity: 0;
+	transition: opacity 1.25s ease-in-out;
 }
 
-.gauges h1,
-.fake-gauges h1 {
-	text-align: center;
-	font-size: 1.75rem;
-	margin-bottom: 2em;
+.intro.animate-element {
+	opacity: 1;
 }
 
-.gauges h1:after,
-.fake-gauges h1:after {
-	background: rgba(0, 0, 0, 0.9);
-	bottom: -5px;
-	content: "";
-	display: block;
-	height: 5.5px;
-	position: relative;
-	width: 60px;
+.intro h1 {
+	font-size: 1.4rem;
+	width: 80%;
 	margin: 0 auto;
+	text-align: center;
+	font-weight: 400;
 }
 
-.gauges .gauge-types,
-.gauges .fake-gauge-types,
-.fake-gauges .gauge-types,
-.fake-gauges .fake-gauge-types {
-	max-width: 1280px;
+.intro .info-buttons {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
-	position: relative;
-	margin: 0 auto 2em;
+	margin: 2em 0 4em;
 }
 
-.gauges .gauge-types .plugs-gauges,
-.gauges .gauge-types .spirals-tapers-gauges,
-.gauges .gauge-types .tunnels-gauges,
-.gauges .gauge-types .fake-spiral-tapers-gauges,
-.gauges .gauge-types .fake-hanging-woods-gauges,
-.gauges .gauge-types .fake-plug-gauges,
-.gauges .fake-gauge-types .plugs-gauges,
-.gauges .fake-gauge-types .spirals-tapers-gauges,
-.gauges .fake-gauge-types .tunnels-gauges,
-.gauges .fake-gauge-types .fake-spiral-tapers-gauges,
-.gauges .fake-gauge-types .fake-hanging-woods-gauges,
-.gauges .fake-gauge-types .fake-plug-gauges,
-.fake-gauges .gauge-types .plugs-gauges,
-.fake-gauges .gauge-types .spirals-tapers-gauges,
-.fake-gauges .gauge-types .tunnels-gauges,
-.fake-gauges .gauge-types .fake-spiral-tapers-gauges,
-.fake-gauges .gauge-types .fake-hanging-woods-gauges,
-.fake-gauges .gauge-types .fake-plug-gauges,
-.fake-gauges .fake-gauge-types .plugs-gauges,
-.fake-gauges .fake-gauge-types .spirals-tapers-gauges,
-.fake-gauges .fake-gauge-types .tunnels-gauges,
-.fake-gauges .fake-gauge-types .fake-spiral-tapers-gauges,
-.fake-gauges .fake-gauge-types .fake-hanging-woods-gauges,
-.fake-gauges .fake-gauge-types .fake-plug-gauges {
+.intro .info-buttons .btn-block {
+	display: block;
 	margin: 0 auto;
 }
 
-.gauges .gauge-types .plugs-gauges .plugs-img,
-.gauges .gauge-types .plugs-gauges .spirals-tapers-img,
-.gauges .gauge-types .plugs-gauges .tunnels-img,
-.gauges .gauge-types .plugs-gauges .fake-plugs-img,
-.gauges .gauge-types .plugs-gauges .fake-hanging-woods-img,
-.gauges .gauge-types .plugs-gauges .fake-plug-img,
-.gauges .gauge-types .spirals-tapers-gauges .plugs-img,
-.gauges .gauge-types .spirals-tapers-gauges .spirals-tapers-img,
-.gauges .gauge-types .spirals-tapers-gauges .tunnels-img,
-.gauges .gauge-types .spirals-tapers-gauges .fake-plugs-img,
-.gauges .gauge-types .spirals-tapers-gauges .fake-hanging-woods-img,
-.gauges .gauge-types .spirals-tapers-gauges .fake-plug-img,
-.gauges .gauge-types .tunnels-gauges .plugs-img,
-.gauges .gauge-types .tunnels-gauges .spirals-tapers-img,
-.gauges .gauge-types .tunnels-gauges .tunnels-img,
-.gauges .gauge-types .tunnels-gauges .fake-plugs-img,
-.gauges .gauge-types .tunnels-gauges .fake-hanging-woods-img,
-.gauges .gauge-types .tunnels-gauges .fake-plug-img,
-.gauges .gauge-types .fake-spiral-tapers-gauges .plugs-img,
-.gauges .gauge-types .fake-spiral-tapers-gauges .spirals-tapers-img,
-.gauges .gauge-types .fake-spiral-tapers-gauges .tunnels-img,
-.gauges .gauge-types .fake-spiral-tapers-gauges .fake-plugs-img,
-.gauges .gauge-types .fake-spiral-tapers-gauges .fake-hanging-woods-img,
-.gauges .gauge-types .fake-spiral-tapers-gauges .fake-plug-img,
-.gauges .gauge-types .fake-hanging-woods-gauges .plugs-img,
-.gauges .gauge-types .fake-hanging-woods-gauges .spirals-tapers-img,
-.gauges .gauge-types .fake-hanging-woods-gauges .tunnels-img,
-.gauges .gauge-types .fake-hanging-woods-gauges .fake-plugs-img,
-.gauges .gauge-types .fake-hanging-woods-gauges .fake-hanging-woods-img,
-.gauges .gauge-types .fake-hanging-woods-gauges .fake-plug-img,
-.gauges .gauge-types .fake-plug-gauges .plugs-img,
-.gauges .gauge-types .fake-plug-gauges .spirals-tapers-img,
-.gauges .gauge-types .fake-plug-gauges .tunnels-img,
-.gauges .gauge-types .fake-plug-gauges .fake-plugs-img,
-.gauges .gauge-types .fake-plug-gauges .fake-hanging-woods-img,
-.gauges .gauge-types .fake-plug-gauges .fake-plug-img,
-.gauges .fake-gauge-types .plugs-gauges .plugs-img,
-.gauges .fake-gauge-types .plugs-gauges .spirals-tapers-img,
-.gauges .fake-gauge-types .plugs-gauges .tunnels-img,
-.gauges .fake-gauge-types .plugs-gauges .fake-plugs-img,
-.gauges .fake-gauge-types .plugs-gauges .fake-hanging-woods-img,
-.gauges .fake-gauge-types .plugs-gauges .fake-plug-img,
-.gauges .fake-gauge-types .spirals-tapers-gauges .plugs-img,
-.gauges .fake-gauge-types .spirals-tapers-gauges .spirals-tapers-img,
-.gauges .fake-gauge-types .spirals-tapers-gauges .tunnels-img,
-.gauges .fake-gauge-types .spirals-tapers-gauges .fake-plugs-img,
-.gauges .fake-gauge-types .spirals-tapers-gauges .fake-hanging-woods-img,
-.gauges .fake-gauge-types .spirals-tapers-gauges .fake-plug-img,
-.gauges .fake-gauge-types .tunnels-gauges .plugs-img,
-.gauges .fake-gauge-types .tunnels-gauges .spirals-tapers-img,
-.gauges .fake-gauge-types .tunnels-gauges .tunnels-img,
-.gauges .fake-gauge-types .tunnels-gauges .fake-plugs-img,
-.gauges .fake-gauge-types .tunnels-gauges .fake-hanging-woods-img,
-.gauges .fake-gauge-types .tunnels-gauges .fake-plug-img,
-.gauges .fake-gauge-types .fake-spiral-tapers-gauges .plugs-img,
-.gauges .fake-gauge-types .fake-spiral-tapers-gauges .spirals-tapers-img,
-.gauges .fake-gauge-types .fake-spiral-tapers-gauges .tunnels-img,
-.gauges .fake-gauge-types .fake-spiral-tapers-gauges .fake-plugs-img,
-.gauges .fake-gauge-types .fake-spiral-tapers-gauges .fake-hanging-woods-img,
-.gauges .fake-gauge-types .fake-spiral-tapers-gauges .fake-plug-img,
-.gauges .fake-gauge-types .fake-hanging-woods-gauges .plugs-img,
-.gauges .fake-gauge-types .fake-hanging-woods-gauges .spirals-tapers-img,
-.gauges .fake-gauge-types .fake-hanging-woods-gauges .tunnels-img,
-.gauges .fake-gauge-types .fake-hanging-woods-gauges .fake-plugs-img,
-.gauges .fake-gauge-types .fake-hanging-woods-gauges .fake-hanging-woods-img,
-.gauges .fake-gauge-types .fake-hanging-woods-gauges .fake-plug-img,
-.gauges .fake-gauge-types .fake-plug-gauges .plugs-img,
-.gauges .fake-gauge-types .fake-plug-gauges .spirals-tapers-img,
-.gauges .fake-gauge-types .fake-plug-gauges .tunnels-img,
-.gauges .fake-gauge-types .fake-plug-gauges .fake-plugs-img,
-.gauges .fake-gauge-types .fake-plug-gauges .fake-hanging-woods-img,
-.gauges .fake-gauge-types .fake-plug-gauges .fake-plug-img,
-.fake-gauges .gauge-types .plugs-gauges .plugs-img,
-.fake-gauges .gauge-types .plugs-gauges .spirals-tapers-img,
-.fake-gauges .gauge-types .plugs-gauges .tunnels-img,
-.fake-gauges .gauge-types .plugs-gauges .fake-plugs-img,
-.fake-gauges .gauge-types .plugs-gauges .fake-hanging-woods-img,
-.fake-gauges .gauge-types .plugs-gauges .fake-plug-img,
-.fake-gauges .gauge-types .spirals-tapers-gauges .plugs-img,
-.fake-gauges .gauge-types .spirals-tapers-gauges .spirals-tapers-img,
-.fake-gauges .gauge-types .spirals-tapers-gauges .tunnels-img,
-.fake-gauges .gauge-types .spirals-tapers-gauges .fake-plugs-img,
-.fake-gauges .gauge-types .spirals-tapers-gauges .fake-hanging-woods-img,
-.fake-gauges .gauge-types .spirals-tapers-gauges .fake-plug-img,
-.fake-gauges .gauge-types .tunnels-gauges .plugs-img,
-.fake-gauges .gauge-types .tunnels-gauges .spirals-tapers-img,
-.fake-gauges .gauge-types .tunnels-gauges .tunnels-img,
-.fake-gauges .gauge-types .tunnels-gauges .fake-plugs-img,
-.fake-gauges .gauge-types .tunnels-gauges .fake-hanging-woods-img,
-.fake-gauges .gauge-types .tunnels-gauges .fake-plug-img,
-.fake-gauges .gauge-types .fake-spiral-tapers-gauges .plugs-img,
-.fake-gauges .gauge-types .fake-spiral-tapers-gauges .spirals-tapers-img,
-.fake-gauges .gauge-types .fake-spiral-tapers-gauges .tunnels-img,
-.fake-gauges .gauge-types .fake-spiral-tapers-gauges .fake-plugs-img,
-.fake-gauges .gauge-types .fake-spiral-tapers-gauges .fake-hanging-woods-img,
-.fake-gauges .gauge-types .fake-spiral-tapers-gauges .fake-plug-img,
-.fake-gauges .gauge-types .fake-hanging-woods-gauges .plugs-img,
-.fake-gauges .gauge-types .fake-hanging-woods-gauges .spirals-tapers-img,
-.fake-gauges .gauge-types .fake-hanging-woods-gauges .tunnels-img,
-.fake-gauges .gauge-types .fake-hanging-woods-gauges .fake-plugs-img,
-.fake-gauges .gauge-types .fake-hanging-woods-gauges .fake-hanging-woods-img,
-.fake-gauges .gauge-types .fake-hanging-woods-gauges .fake-plug-img,
-.fake-gauges .gauge-types .fake-plug-gauges .plugs-img,
-.fake-gauges .gauge-types .fake-plug-gauges .spirals-tapers-img,
-.fake-gauges .gauge-types .fake-plug-gauges .tunnels-img,
-.fake-gauges .gauge-types .fake-plug-gauges .fake-plugs-img,
-.fake-gauges .gauge-types .fake-plug-gauges .fake-hanging-woods-img,
-.fake-gauges .gauge-types .fake-plug-gauges .fake-plug-img,
-.fake-gauges .fake-gauge-types .plugs-gauges .plugs-img,
-.fake-gauges .fake-gauge-types .plugs-gauges .spirals-tapers-img,
-.fake-gauges .fake-gauge-types .plugs-gauges .tunnels-img,
-.fake-gauges .fake-gauge-types .plugs-gauges .fake-plugs-img,
-.fake-gauges .fake-gauge-types .plugs-gauges .fake-hanging-woods-img,
-.fake-gauges .fake-gauge-types .plugs-gauges .fake-plug-img,
-.fake-gauges .fake-gauge-types .spirals-tapers-gauges .plugs-img,
-.fake-gauges .fake-gauge-types .spirals-tapers-gauges .spirals-tapers-img,
-.fake-gauges .fake-gauge-types .spirals-tapers-gauges .tunnels-img,
-.fake-gauges .fake-gauge-types .spirals-tapers-gauges .fake-plugs-img,
-.fake-gauges .fake-gauge-types .spirals-tapers-gauges .fake-hanging-woods-img,
-.fake-gauges .fake-gauge-types .spirals-tapers-gauges .fake-plug-img,
-.fake-gauges .fake-gauge-types .tunnels-gauges .plugs-img,
-.fake-gauges .fake-gauge-types .tunnels-gauges .spirals-tapers-img,
-.fake-gauges .fake-gauge-types .tunnels-gauges .tunnels-img,
-.fake-gauges .fake-gauge-types .tunnels-gauges .fake-plugs-img,
-.fake-gauges .fake-gauge-types .tunnels-gauges .fake-hanging-woods-img,
-.fake-gauges .fake-gauge-types .tunnels-gauges .fake-plug-img,
-.fake-gauges .fake-gauge-types .fake-spiral-tapers-gauges .plugs-img,
-.fake-gauges .fake-gauge-types .fake-spiral-tapers-gauges .spirals-tapers-img,
-.fake-gauges .fake-gauge-types .fake-spiral-tapers-gauges .tunnels-img,
-.fake-gauges .fake-gauge-types .fake-spiral-tapers-gauges .fake-plugs-img,
-.fake-gauges .fake-gauge-types .fake-spiral-tapers-gauges .fake-hanging-woods-img,
-.fake-gauges .fake-gauge-types .fake-spiral-tapers-gauges .fake-plug-img,
-.fake-gauges .fake-gauge-types .fake-hanging-woods-gauges .plugs-img,
-.fake-gauges .fake-gauge-types .fake-hanging-woods-gauges .spirals-tapers-img,
-.fake-gauges .fake-gauge-types .fake-hanging-woods-gauges .tunnels-img,
-.fake-gauges .fake-gauge-types .fake-hanging-woods-gauges .fake-plugs-img,
-.fake-gauges .fake-gauge-types .fake-hanging-woods-gauges .fake-hanging-woods-img,
-.fake-gauges .fake-gauge-types .fake-hanging-woods-gauges .fake-plug-img,
-.fake-gauges .fake-gauge-types .fake-plug-gauges .plugs-img,
-.fake-gauges .fake-gauge-types .fake-plug-gauges .spirals-tapers-img,
-.fake-gauges .fake-gauge-types .fake-plug-gauges .tunnels-img,
-.fake-gauges .fake-gauge-types .fake-plug-gauges .fake-plugs-img,
-.fake-gauges .fake-gauge-types .fake-plug-gauges .fake-hanging-woods-img,
-.fake-gauges .fake-gauge-types .fake-plug-gauges .fake-plug-img {
-	position: relative;
-	z-index: 0;
+.intro .info-buttons .btn-block button {
+	margin: 1em;
+	background: transparent;
+	border: 2px solid #303030;
+	letter-spacing: 1px;
+	padding: 15px 100px;
+	font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+	font-size: .9rem;
+	color: #303030;
+	transition: all .25s linear;
 }
 
-.gauges .gauge-types .plugs-gauges .plugs-img:before,
-.gauges .gauge-types .plugs-gauges .spirals-tapers-img:before,
-.gauges .gauge-types .plugs-gauges .tunnels-img:before,
-.gauges .gauge-types .plugs-gauges .fake-plugs-img:before,
-.gauges .gauge-types .plugs-gauges .fake-hanging-woods-img:before,
-.gauges .gauge-types .plugs-gauges .fake-plug-img:before,
-.gauges .gauge-types .spirals-tapers-gauges .plugs-img:before,
-.gauges .gauge-types .spirals-tapers-gauges .spirals-tapers-img:before,
-.gauges .gauge-types .spirals-tapers-gauges .tunnels-img:before,
-.gauges .gauge-types .spirals-tapers-gauges .fake-plugs-img:before,
-.gauges .gauge-types .spirals-tapers-gauges .fake-hanging-woods-img:before,
-.gauges .gauge-types .spirals-tapers-gauges .fake-plug-img:before,
-.gauges .gauge-types .tunnels-gauges .plugs-img:before,
-.gauges .gauge-types .tunnels-gauges .spirals-tapers-img:before,
-.gauges .gauge-types .tunnels-gauges .tunnels-img:before,
-.gauges .gauge-types .tunnels-gauges .fake-plugs-img:before,
-.gauges .gauge-types .tunnels-gauges .fake-hanging-woods-img:before,
-.gauges .gauge-types .tunnels-gauges .fake-plug-img:before,
-.gauges .gauge-types .fake-spiral-tapers-gauges .plugs-img:before,
-.gauges .gauge-types .fake-spiral-tapers-gauges .spirals-tapers-img:before,
-.gauges .gauge-types .fake-spiral-tapers-gauges .tunnels-img:before,
-.gauges .gauge-types .fake-spiral-tapers-gauges .fake-plugs-img:before,
-.gauges .gauge-types .fake-spiral-tapers-gauges .fake-hanging-woods-img:before,
-.gauges .gauge-types .fake-spiral-tapers-gauges .fake-plug-img:before,
-.gauges .gauge-types .fake-hanging-woods-gauges .plugs-img:before,
-.gauges .gauge-types .fake-hanging-woods-gauges .spirals-tapers-img:before,
-.gauges .gauge-types .fake-hanging-woods-gauges .tunnels-img:before,
-.gauges .gauge-types .fake-hanging-woods-gauges .fake-plugs-img:before,
-.gauges .gauge-types .fake-hanging-woods-gauges .fake-hanging-woods-img:before,
-.gauges .gauge-types .fake-hanging-woods-gauges .fake-plug-img:before,
-.gauges .gauge-types .fake-plug-gauges .plugs-img:before,
-.gauges .gauge-types .fake-plug-gauges .spirals-tapers-img:before,
-.gauges .gauge-types .fake-plug-gauges .tunnels-img:before,
-.gauges .gauge-types .fake-plug-gauges .fake-plugs-img:before,
-.gauges .gauge-types .fake-plug-gauges .fake-hanging-woods-img:before,
-.gauges .gauge-types .fake-plug-gauges .fake-plug-img:before,
-.gauges .fake-gauge-types .plugs-gauges .plugs-img:before,
-.gauges .fake-gauge-types .plugs-gauges .spirals-tapers-img:before,
-.gauges .fake-gauge-types .plugs-gauges .tunnels-img:before,
-.gauges .fake-gauge-types .plugs-gauges .fake-plugs-img:before,
-.gauges .fake-gauge-types .plugs-gauges .fake-hanging-woods-img:before,
-.gauges .fake-gauge-types .plugs-gauges .fake-plug-img:before,
-.gauges .fake-gauge-types .spirals-tapers-gauges .plugs-img:before,
-.gauges .fake-gauge-types .spirals-tapers-gauges .spirals-tapers-img:before,
-.gauges .fake-gauge-types .spirals-tapers-gauges .tunnels-img:before,
-.gauges .fake-gauge-types .spirals-tapers-gauges .fake-plugs-img:before,
-.gauges .fake-gauge-types .spirals-tapers-gauges .fake-hanging-woods-img:before,
-.gauges .fake-gauge-types .spirals-tapers-gauges .fake-plug-img:before,
-.gauges .fake-gauge-types .tunnels-gauges .plugs-img:before,
-.gauges .fake-gauge-types .tunnels-gauges .spirals-tapers-img:before,
-.gauges .fake-gauge-types .tunnels-gauges .tunnels-img:before,
-.gauges .fake-gauge-types .tunnels-gauges .fake-plugs-img:before,
-.gauges .fake-gauge-types .tunnels-gauges .fake-hanging-woods-img:before,
-.gauges .fake-gauge-types .tunnels-gauges .fake-plug-img:before,
-.gauges .fake-gauge-types .fake-spiral-tapers-gauges .plugs-img:before,
-.gauges .fake-gauge-types .fake-spiral-tapers-gauges .spirals-tapers-img:before,
-.gauges .fake-gauge-types .fake-spiral-tapers-gauges .tunnels-img:before,
-.gauges .fake-gauge-types .fake-spiral-tapers-gauges .fake-plugs-img:before,
-.gauges .fake-gauge-types .fake-spiral-tapers-gauges .fake-hanging-woods-img:before,
-.gauges .fake-gauge-types .fake-spiral-tapers-gauges .fake-plug-img:before,
-.gauges .fake-gauge-types .fake-hanging-woods-gauges .plugs-img:before,
-.gauges .fake-gauge-types .fake-hanging-woods-gauges .spirals-tapers-img:before,
-.gauges .fake-gauge-types .fake-hanging-woods-gauges .tunnels-img:before,
-.gauges .fake-gauge-types .fake-hanging-woods-gauges .fake-plugs-img:before,
-.gauges .fake-gauge-types .fake-hanging-woods-gauges .fake-hanging-woods-img:before,
-.gauges .fake-gauge-types .fake-hanging-woods-gauges .fake-plug-img:before,
-.gauges .fake-gauge-types .fake-plug-gauges .plugs-img:before,
-.gauges .fake-gauge-types .fake-plug-gauges .spirals-tapers-img:before,
-.gauges .fake-gauge-types .fake-plug-gauges .tunnels-img:before,
-.gauges .fake-gauge-types .fake-plug-gauges .fake-plugs-img:before,
-.gauges .fake-gauge-types .fake-plug-gauges .fake-hanging-woods-img:before,
-.gauges .fake-gauge-types .fake-plug-gauges .fake-plug-img:before,
-.fake-gauges .gauge-types .plugs-gauges .plugs-img:before,
-.fake-gauges .gauge-types .plugs-gauges .spirals-tapers-img:before,
-.fake-gauges .gauge-types .plugs-gauges .tunnels-img:before,
-.fake-gauges .gauge-types .plugs-gauges .fake-plugs-img:before,
-.fake-gauges .gauge-types .plugs-gauges .fake-hanging-woods-img:before,
-.fake-gauges .gauge-types .plugs-gauges .fake-plug-img:before,
-.fake-gauges .gauge-types .spirals-tapers-gauges .plugs-img:before,
-.fake-gauges .gauge-types .spirals-tapers-gauges .spirals-tapers-img:before,
-.fake-gauges .gauge-types .spirals-tapers-gauges .tunnels-img:before,
-.fake-gauges .gauge-types .spirals-tapers-gauges .fake-plugs-img:before,
-.fake-gauges .gauge-types .spirals-tapers-gauges .fake-hanging-woods-img:before,
-.fake-gauges .gauge-types .spirals-tapers-gauges .fake-plug-img:before,
-.fake-gauges .gauge-types .tunnels-gauges .plugs-img:before,
-.fake-gauges .gauge-types .tunnels-gauges .spirals-tapers-img:before,
-.fake-gauges .gauge-types .tunnels-gauges .tunnels-img:before,
-.fake-gauges .gauge-types .tunnels-gauges .fake-plugs-img:before,
-.fake-gauges .gauge-types .tunnels-gauges .fake-hanging-woods-img:before,
-.fake-gauges .gauge-types .tunnels-gauges .fake-plug-img:before,
-.fake-gauges .gauge-types .fake-spiral-tapers-gauges .plugs-img:before,
-.fake-gauges .gauge-types .fake-spiral-tapers-gauges .spirals-tapers-img:before,
-.fake-gauges .gauge-types .fake-spiral-tapers-gauges .tunnels-img:before,
-.fake-gauges .gauge-types .fake-spiral-tapers-gauges .fake-plugs-img:before,
-.fake-gauges .gauge-types .fake-spiral-tapers-gauges .fake-hanging-woods-img:before,
-.fake-gauges .gauge-types .fake-spiral-tapers-gauges .fake-plug-img:before,
-.fake-gauges .gauge-types .fake-hanging-woods-gauges .plugs-img:before,
-.fake-gauges .gauge-types .fake-hanging-woods-gauges .spirals-tapers-img:before,
-.fake-gauges .gauge-types .fake-hanging-woods-gauges .tunnels-img:before,
-.fake-gauges .gauge-types .fake-hanging-woods-gauges .fake-plugs-img:before,
-.fake-gauges .gauge-types .fake-hanging-woods-gauges .fake-hanging-woods-img:before,
-.fake-gauges .gauge-types .fake-hanging-woods-gauges .fake-plug-img:before,
-.fake-gauges .gauge-types .fake-plug-gauges .plugs-img:before,
-.fake-gauges .gauge-types .fake-plug-gauges .spirals-tapers-img:before,
-.fake-gauges .gauge-types .fake-plug-gauges .tunnels-img:before,
-.fake-gauges .gauge-types .fake-plug-gauges .fake-plugs-img:before,
-.fake-gauges .gauge-types .fake-plug-gauges .fake-hanging-woods-img:before,
-.fake-gauges .gauge-types .fake-plug-gauges .fake-plug-img:before,
-.fake-gauges .fake-gauge-types .plugs-gauges .plugs-img:before,
-.fake-gauges .fake-gauge-types .plugs-gauges .spirals-tapers-img:before,
-.fake-gauges .fake-gauge-types .plugs-gauges .tunnels-img:before,
-.fake-gauges .fake-gauge-types .plugs-gauges .fake-plugs-img:before,
-.fake-gauges .fake-gauge-types .plugs-gauges .fake-hanging-woods-img:before,
-.fake-gauges .fake-gauge-types .plugs-gauges .fake-plug-img:before,
-.fake-gauges .fake-gauge-types .spirals-tapers-gauges .plugs-img:before,
-.fake-gauges .fake-gauge-types .spirals-tapers-gauges .spirals-tapers-img:before,
-.fake-gauges .fake-gauge-types .spirals-tapers-gauges .tunnels-img:before,
-.fake-gauges .fake-gauge-types .spirals-tapers-gauges .fake-plugs-img:before,
-.fake-gauges .fake-gauge-types .spirals-tapers-gauges .fake-hanging-woods-img:before,
-.fake-gauges .fake-gauge-types .spirals-tapers-gauges .fake-plug-img:before,
-.fake-gauges .fake-gauge-types .tunnels-gauges .plugs-img:before,
-.fake-gauges .fake-gauge-types .tunnels-gauges .spirals-tapers-img:before,
-.fake-gauges .fake-gauge-types .tunnels-gauges .tunnels-img:before,
-.fake-gauges .fake-gauge-types .tunnels-gauges .fake-plugs-img:before,
-.fake-gauges .fake-gauge-types .tunnels-gauges .fake-hanging-woods-img:before,
-.fake-gauges .fake-gauge-types .tunnels-gauges .fake-plug-img:before,
-.fake-gauges .fake-gauge-types .fake-spiral-tapers-gauges .plugs-img:before,
-.fake-gauges .fake-gauge-types .fake-spiral-tapers-gauges .spirals-tapers-img:before,
-.fake-gauges .fake-gauge-types .fake-spiral-tapers-gauges .tunnels-img:before,
-.fake-gauges .fake-gauge-types .fake-spiral-tapers-gauges .fake-plugs-img:before,
-.fake-gauges .fake-gauge-types .fake-spiral-tapers-gauges .fake-hanging-woods-img:before,
-.fake-gauges .fake-gauge-types .fake-spiral-tapers-gauges .fake-plug-img:before,
-.fake-gauges .fake-gauge-types .fake-hanging-woods-gauges .plugs-img:before,
-.fake-gauges .fake-gauge-types .fake-hanging-woods-gauges .spirals-tapers-img:before,
-.fake-gauges .fake-gauge-types .fake-hanging-woods-gauges .tunnels-img:before,
-.fake-gauges .fake-gauge-types .fake-hanging-woods-gauges .fake-plugs-img:before,
-.fake-gauges .fake-gauge-types .fake-hanging-woods-gauges .fake-hanging-woods-img:before,
-.fake-gauges .fake-gauge-types .fake-hanging-woods-gauges .fake-plug-img:before,
-.fake-gauges .fake-gauge-types .fake-plug-gauges .plugs-img:before,
-.fake-gauges .fake-gauge-types .fake-plug-gauges .spirals-tapers-img:before,
-.fake-gauges .fake-gauge-types .fake-plug-gauges .tunnels-img:before,
-.fake-gauges .fake-gauge-types .fake-plug-gauges .fake-plugs-img:before,
-.fake-gauges .fake-gauge-types .fake-plug-gauges .fake-hanging-woods-img:before,
-.fake-gauges .fake-gauge-types .fake-plug-gauges .fake-plug-img:before {
+.intro .info-buttons .btn-block button:hover {
+	background: #303030;
+	color: #fff;
+}
+
+.gauge-imgs ul {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	padding: 0;
+	margin: 0;
+	-ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
+}
+
+.gauge-imgs ul li {
+	position: relative;
+	list-style: none;
+	min-width: 400px;
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+	margin: 0 1px 1px 0;
+	overflow: hidden;
+}
+
+.gauge-imgs ul li:before {
 	content: '';
 	position: absolute;
+	opacity: 0;
+	transition: all .25s linear;
 	left: 0;
 	top: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(0, 0, 0, 0.25);
+	background: rgba(0, 0, 0, 0.75);
 	display: block;
 	z-index: 1;
 }
 
-.gauges .gauge-types .plugs-gauges img,
-.gauges .gauge-types .spirals-tapers-gauges img,
-.gauges .gauge-types .tunnels-gauges img,
-.gauges .gauge-types .fake-spiral-tapers-gauges img,
-.gauges .gauge-types .fake-hanging-woods-gauges img,
-.gauges .gauge-types .fake-plug-gauges img,
-.gauges .fake-gauge-types .plugs-gauges img,
-.gauges .fake-gauge-types .spirals-tapers-gauges img,
-.gauges .fake-gauge-types .tunnels-gauges img,
-.gauges .fake-gauge-types .fake-spiral-tapers-gauges img,
-.gauges .fake-gauge-types .fake-hanging-woods-gauges img,
-.gauges .fake-gauge-types .fake-plug-gauges img,
-.fake-gauges .gauge-types .plugs-gauges img,
-.fake-gauges .gauge-types .spirals-tapers-gauges img,
-.fake-gauges .gauge-types .tunnels-gauges img,
-.fake-gauges .gauge-types .fake-spiral-tapers-gauges img,
-.fake-gauges .gauge-types .fake-hanging-woods-gauges img,
-.fake-gauges .gauge-types .fake-plug-gauges img,
-.fake-gauges .fake-gauge-types .plugs-gauges img,
-.fake-gauges .fake-gauge-types .spirals-tapers-gauges img,
-.fake-gauges .fake-gauge-types .tunnels-gauges img,
-.fake-gauges .fake-gauge-types .fake-spiral-tapers-gauges img,
-.fake-gauges .fake-gauge-types .fake-hanging-woods-gauges img,
-.fake-gauges .fake-gauge-types .fake-plug-gauges img {
-	max-width: 100%;
-	height: auto;
-	display: block;
+.gauge-imgs ul li:hover:before {
+	opacity: 1;
 }
 
-.gauges .gauge-types .plugs-gauges button,
-.gauges .gauge-types .spirals-tapers-gauges button,
-.gauges .gauge-types .tunnels-gauges button,
-.gauges .gauge-types .fake-spiral-tapers-gauges button,
-.gauges .gauge-types .fake-hanging-woods-gauges button,
-.gauges .gauge-types .fake-plug-gauges button,
-.gauges .fake-gauge-types .plugs-gauges button,
-.gauges .fake-gauge-types .spirals-tapers-gauges button,
-.gauges .fake-gauge-types .tunnels-gauges button,
-.gauges .fake-gauge-types .fake-spiral-tapers-gauges button,
-.gauges .fake-gauge-types .fake-hanging-woods-gauges button,
-.gauges .fake-gauge-types .fake-plug-gauges button,
-.fake-gauges .gauge-types .plugs-gauges button,
-.fake-gauges .gauge-types .spirals-tapers-gauges button,
-.fake-gauges .gauge-types .tunnels-gauges button,
-.fake-gauges .gauge-types .fake-spiral-tapers-gauges button,
-.fake-gauges .gauge-types .fake-hanging-woods-gauges button,
-.fake-gauges .gauge-types .fake-plug-gauges button,
-.fake-gauges .fake-gauge-types .plugs-gauges button,
-.fake-gauges .fake-gauge-types .spirals-tapers-gauges button,
-.fake-gauges .fake-gauge-types .tunnels-gauges button,
-.fake-gauges .fake-gauge-types .fake-spiral-tapers-gauges button,
-.fake-gauges .fake-gauge-types .fake-hanging-woods-gauges button,
-.fake-gauges .fake-gauge-types .fake-plug-gauges button {
-	color: #fff;
-	padding: 10px 15px;
-	border: 2px solid #fff;
-	background: transparent;
-	position: relative;
-	z-index: 2;
-	top: -70px;
-	display: block;
-	margin: 0 auto;
-	transition: background .25s linear;
-}
-
-.gauges .gauge-types .plugs-gauges button:hover,
-.gauges .gauge-types .spirals-tapers-gauges button:hover,
-.gauges .gauge-types .tunnels-gauges button:hover,
-.gauges .gauge-types .fake-spiral-tapers-gauges button:hover,
-.gauges .gauge-types .fake-hanging-woods-gauges button:hover,
-.gauges .gauge-types .fake-plug-gauges button:hover,
-.gauges .fake-gauge-types .plugs-gauges button:hover,
-.gauges .fake-gauge-types .spirals-tapers-gauges button:hover,
-.gauges .fake-gauge-types .tunnels-gauges button:hover,
-.gauges .fake-gauge-types .fake-spiral-tapers-gauges button:hover,
-.gauges .fake-gauge-types .fake-hanging-woods-gauges button:hover,
-.gauges .fake-gauge-types .fake-plug-gauges button:hover,
-.fake-gauges .gauge-types .plugs-gauges button:hover,
-.fake-gauges .gauge-types .spirals-tapers-gauges button:hover,
-.fake-gauges .gauge-types .tunnels-gauges button:hover,
-.fake-gauges .gauge-types .fake-spiral-tapers-gauges button:hover,
-.fake-gauges .gauge-types .fake-hanging-woods-gauges button:hover,
-.fake-gauges .gauge-types .fake-plug-gauges button:hover,
-.fake-gauges .fake-gauge-types .plugs-gauges button:hover,
-.fake-gauges .fake-gauge-types .spirals-tapers-gauges button:hover,
-.fake-gauges .fake-gauge-types .tunnels-gauges button:hover,
-.fake-gauges .fake-gauge-types .fake-spiral-tapers-gauges button:hover,
-.fake-gauges .fake-gauge-types .fake-hanging-woods-gauges button:hover,
-.fake-gauges .fake-gauge-types .fake-plug-gauges button:hover {
-	background: #000;
-	font-weight: 700;
-}
-
-.gauges .gauge-types .plugs-gauges button h2,
-.gauges .gauge-types .spirals-tapers-gauges button h2,
-.gauges .gauge-types .tunnels-gauges button h2,
-.gauges .gauge-types .fake-spiral-tapers-gauges button h2,
-.gauges .gauge-types .fake-hanging-woods-gauges button h2,
-.gauges .gauge-types .fake-plug-gauges button h2,
-.gauges .fake-gauge-types .plugs-gauges button h2,
-.gauges .fake-gauge-types .spirals-tapers-gauges button h2,
-.gauges .fake-gauge-types .tunnels-gauges button h2,
-.gauges .fake-gauge-types .fake-spiral-tapers-gauges button h2,
-.gauges .fake-gauge-types .fake-hanging-woods-gauges button h2,
-.gauges .fake-gauge-types .fake-plug-gauges button h2,
-.fake-gauges .gauge-types .plugs-gauges button h2,
-.fake-gauges .gauge-types .spirals-tapers-gauges button h2,
-.fake-gauges .gauge-types .tunnels-gauges button h2,
-.fake-gauges .gauge-types .fake-spiral-tapers-gauges button h2,
-.fake-gauges .gauge-types .fake-hanging-woods-gauges button h2,
-.fake-gauges .gauge-types .fake-plug-gauges button h2,
-.fake-gauges .fake-gauge-types .plugs-gauges button h2,
-.fake-gauges .fake-gauge-types .spirals-tapers-gauges button h2,
-.fake-gauges .fake-gauge-types .tunnels-gauges button h2,
-.fake-gauges .fake-gauge-types .fake-spiral-tapers-gauges button h2,
-.fake-gauges .fake-gauge-types .fake-hanging-woods-gauges button h2,
-.fake-gauges .fake-gauge-types .fake-plug-gauges button h2 {
-	font-size: 1rem;
-	font-weight: bold;
-	margin: 0;
-	padding: 5px 10px;
-}
-
-.gauges.animate-element {
-	-webkit-animation: translateLeft 1s ease-out both, appear 1s linear both;
-	        animation: translateLeft 1s ease-out both, appear 1s linear both;
-}
-
-.fake-gauges.animate-element {
-	-webkit-animation: translateRight 1s ease-out both, appear 1s linear both;
-	        animation: translateRight 1s ease-out both, appear 1s linear both;
-}
-
-.free-bag,
-.piercing-care {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	background: url("http://tribalgauges.dev/wp-content/uploads/2017/10/ricepaper-bg.png") repeat center center;
-	padding: 1em;
-	-webkit-box-pack: center;
-	    -ms-flex-pack: center;
-	        justify-content: center;
-	-webkit-box-align: center;
-	    -ms-flex-align: center;
-	        align-items: center;
-	margin-bottom: 3em;
-}
-
-.free-bag .piercing-scale,
-.piercing-care .piercing-scale {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-align: center;
-	    -ms-flex-align: center;
-	        align-items: center;
-	color: #777;
-}
-
-.free-bag .piercing-scale:hover img,
-.piercing-care .piercing-scale:hover img {
+.gauge-imgs ul li:hover img {
 	-webkit-transform: scale(1.1);
 	        transform: scale(1.1);
 }
 
-.free-bag h2,
-.piercing-care h2 {
-	font-size: 1.25rem;
-	margin: 0 1.5em;
-}
-
-.free-bag img,
-.piercing-care img {
+.gauge-imgs ul li img {
 	max-width: 100%;
 	height: auto;
-	transition: -webkit-transform .25s linear;
-	transition: transform .25s linear;
-	transition: transform .25s linear, -webkit-transform .25s linear;
+	display: block;
+	transition: all .2s linear;
 }
 
-.piercing-care {
-	background: url("http://tribalgauges.dev/wp-content/uploads/2017/10/green_dust_scratch.png") repeat center center;
+.gauge-imgs ul li .btb,
+.gauge-imgs ul li .btr,
+.gauge-imgs ul li .bbl,
+.gauge-imgs ul li .bbt {
+	position: absolute;
+	z-index: 1;
+	background-color: #e0474c;
+}
+
+.gauge-imgs ul li .btb {
+	width: 2px;
+	height: 0;
+	top: 0;
+	left: 0;
+}
+
+.gauge-imgs ul li .btr {
+	width: 0;
+	height: 2px;
+	left: 0;
+	top: 0;
+}
+
+.gauge-imgs ul li .bbt {
+	width: 2px;
+	height: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.gauge-imgs ul li .bbl {
+	height: 2px;
+	width: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.gauge-imgs .imgwrapper:hover .overlay-text {
+	opacity: 1;
+}
+
+.gauge-imgs .imgwrapper:hover .overlay-text a:hover {
+	color: #fff;
+	border-color: #fff;
+	-webkit-transform: scale(1.2);
+	        transform: scale(1.2);
+}
+
+.gauge-imgs .imgwrapper .overlay-text {
+	position: absolute;
+	z-index: 2;
+	top: 40%;
+	color: #fff;
+	opacity: 0;
+	transition: all .25s linear;
+	text-align: center;
+	width: 100%;
+}
+
+.gauge-imgs .imgwrapper .overlay-text h2 {
+	font-size: 1.5rem;
+	margin: 0 0 1em;
+}
+
+.gauge-imgs .imgwrapper .overlay-text a {
+	color: rgba(255, 255, 255, 0.8);
+	font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+	font-size: 1rem;
+	padding: 8px 16px;
+	background: transparent;
+	border: 2px solid rgba(255, 255, 255, 0.8);
+	transition: all 0.5s cubic-bezier(0.47, 2.02, 0.31, -0.36);
+	font-size: 1rem;
+	display: inline-block;
 }
 
 .accessories-block {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
+	padding-top: 1em;
 	max-width: 1280px;
 	margin: 0 auto;
-	opacity: 0;
 	-webkit-box-align: center;
 	    -ms-flex-align: center;
 	        align-items: center;
-	margin-bottom: 3em;
 }
 
 .accessories-block.animate-element {
-	-webkit-animation: appear 1s linear both;
-	        animation: appear 1s linear both;
+	-webkit-animation: appear 1.25s linear both;
+	        animation: appear 1.25s linear both;
 }
 
 .accessories-block img {
@@ -2159,10 +1801,13 @@ Header Menu
 
 .accessories-block .accessories {
 	margin: 0 auto;
+	text-align: center;
 }
 
 .accessories-block .accessories h2 {
-	font-size: 1.35rem;
+	font-size: 2rem;
+	text-align: center;
+	color: rgba(0, 0, 0, 0.8);
 	margin: 0 0 1em;
 }
 
@@ -2177,28 +1822,428 @@ Header Menu
 	margin: 0 auto;
 }
 
-.accessories-block .accessories h2:after {
-	margin: 0;
-}
-
 .accessories-block .accessories p {
-	font-size: 1.1rem;
+	font-size: 1.25rem;
 	color: rgba(0, 0, 0, 0.8);
 }
 
-.accessories-block .accessories button {
+.accessories-block .accessories a {
 	background: #b11a21;
 	color: #fff;
+	font-size: 1.25rem;
+	padding: 10px 25px;
+	border: none;
+	transition: -webkit-transform .3s linear;
+	transition: transform .3s linear;
+	transition: transform .3s linear, -webkit-transform .3s linear;
+	display: inline-block;
+	font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+	border-radius: 3px;
+}
+
+.accessories-block .accessories a:hover {
+	-webkit-transform: scale(1.1);
+	        transform: scale(1.1);
+}
+
+.affiliates {
+	color: rgba(0, 0, 0, 0.7);
+	background: linear-gradient(150deg, #4AC29A 35%, #BDFFF3 100%);
+}
+
+.affiliates h2 {
+	font-size: 1.5rem;
+	text-align: center;
+	margin: 0;
+	padding: 1em 0 0;
+}
+
+.affiliates ul {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-pack: distribute;
+	    justify-content: space-around;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.affiliates ul li {
+	margin: 1em;
+}
+
+.events-free-piercing {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+.events-free-piercing .events {
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+	color: rgba(0, 0, 0, 0.7);
+	text-align: center;
+}
+
+.events-free-piercing .events h2 {
+	font-size: 1.5rem;
+	word-spacing: .15em;
+}
+
+.events-free-piercing .events p {
 	font-size: 1.1rem;
-	padding: 10px 15px;
+}
+
+.events-free-piercing .events a {
+	display: inline-block;
+}
+
+.events-free-piercing .events a:hover img {
+	opacity: .85;
+}
+
+.events-free-piercing .events a img {
+	-webkit-transform: scale(0.8);
+	        transform: scale(0.8);
+	transition: opacity .2s linear;
+}
+
+.events-free-piercing .events ul {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
+	-ms-flex-pack: distribute;
+	    justify-content: space-around;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	list-style: none;
+}
+
+.events-free-piercing .events ul li {
+	margin: 2em 10px;
+}
+
+.events-free-piercing .free-bag-and-care {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	overflow: hidden;
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+	background: linear-gradient(150deg, #f5debc 40%, #c9e8a3 100%);
+}
+
+.events-free-piercing .free-bag {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	padding: 2em 1em;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+}
+
+.events-free-piercing .free-bag h2 {
+	font-size: 1.25rem;
+	text-align: center;
+	margin: 1em 0;
+	color: rgba(0, 0, 0, 0.7);
+}
+
+.events-free-piercing .free-bag img {
+	max-width: 100%;
+	height: auto;
+	transition: -webkit-transform .25s linear;
+	transition: transform .25s linear;
+	transition: transform .25s linear, -webkit-transform .25s linear;
+}
+
+.events-free-piercing .piercing-care {
+	padding: 1em;
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: end;
+	    -ms-flex-align: end;
+	        align-items: flex-end;
+}
+
+.events-free-piercing .piercing-care .piercing-scale {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	color: #777;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: reverse;
+	    -ms-flex-direction: column-reverse;
+	        flex-direction: column-reverse;
+	padding-bottom: 1em;
+}
+
+.events-free-piercing .piercing-care .piercing-scale:hover img {
+	-webkit-transform: scale(1.1);
+	        transform: scale(1.1);
+}
+
+.events-free-piercing h2 {
+	font-size: 1.25rem;
+	text-align: center;
+	margin: 1em 0;
+	color: rgba(0, 0, 0, 0.7);
+}
+
+.events-free-piercing img {
+	max-width: 100%;
+	height: auto;
+	transition: -webkit-transform .25s linear;
+	transition: transform .25s linear;
+	transition: transform .25s linear, -webkit-transform .25s linear;
+}
+
+.page-id-74244 .entry-content {
+	margin: 0;
+}
+
+.piercing-care-page {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+}
+
+.piercing-care-page img,
+.piercing-care-page .piercing-text {
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+}
+
+.piercing-care-page .piercing-text {
+	padding: 2em;
+}
+
+.piercing-care-page .piercing-text h1 {
+	margin: 0;
+	font-size: 1.5rem;
+	color: rgba(0, 0, 0, 0.7);
+}
+
+.piercing-care-page .piercing-text p {
+	font-size: 1.05rem;
+	margin: 2em 0;
+}
+
+.piercing-care-page .piercing-text a {
+	background: #e0474c;
+	color: #fff;
+	border-radius: 30px;
+	padding: 8px 16px;
+	font-size: 1rem;
+	display: inline-block;
 	transition: -webkit-transform .3s linear;
 	transition: transform .3s linear;
 	transition: transform .3s linear, -webkit-transform .3s linear;
 }
 
-.accessories-block .accessories button:hover {
-	-webkit-transform: scale(1.1);
-	        transform: scale(1.1);
+.piercing-care-page .piercing-text a:hover {
+	-webkit-transform: scale(1.05);
+	        transform: scale(1.05);
+}
+
+.page-id-74248 .site-content {
+	background: #f5f5f5;
+}
+
+.contact-us {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	color: rgba(0, 0, 0, 0.8);
+}
+
+.contact-us .nnja-form {
+	-webkit-box-flex: 2;
+	    -ms-flex: 2;
+	        flex: 2;
+}
+
+.contact-us .nnja-form h3 {
+	font-size: 1.5rem;
+}
+
+.contact-us .nnja-form label {
+	font-size: 1rem;
+}
+
+.contact-us .nnja-form .nf-form-fields-required {
+	display: none;
+}
+
+.contact-us .nnja-form .nf-form-cont {
+	max-width: 500px;
+	margin: 0 auto;
+}
+
+.contact-us .nnja-form .nf-field-element textarea {
+	height: 100px;
+}
+
+.contact-us .nnja-form .submit-container .submit-wrap input {
+	background: #b11a21;
+	font-size: 1.1rem;
+	color: #fff;
+	padding: 12px 24px;
+}
+
+.contact-us .contact-info {
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+}
+
+.contact-us .contact-info h3 {
+	font-size: 1.5rem;
+	margin-bottom: 1em;
+}
+
+.contact-us .contact-info p {
+	font-size: 1.05rem;
+	margin: 0;
+}
+
+.contact-us .contact-info .social-connect {
+	margin: 2em 0 1em;
+	font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+	font-weight: 700;
+}
+
+.contact-us .contact-info .social-connect p {
+	font-size: 1.5rem;
+}
+
+.contact-us .contact-info .social-connect .social-icons {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	margin-top: .5em;
+}
+
+.contact-us .contact-info .social-connect .social-icons a {
+	margin-right: 1em;
+}
+
+.shipping-returns-page {
+	padding: 1em 2em;
+	color: rgba(0, 0, 0, 0.8);
+}
+
+.shipping-returns-page .shipping {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+}
+
+.shipping-returns-page .shipping .shipping-text {
+	margin-right: 1em;
+}
+
+.shipping-returns-page .shipping .shipping-text h2 {
+	font-size: 1.5rem;
+}
+
+.shipping-returns-page .shipping .shipping-text p {
+	padding-left: .5em;
+}
+
+.shipping-returns-page .shipping .shipping-text p span {
+	font-weight: 700;
+}
+
+.shipping-returns-page .returns .returns-text h2 {
+	font-size: 1.5rem;
+}
+
+.shipping-returns-page .returns .returns-text p {
+	padding-left: .5em;
+}
+
+.events-archive .control-header-height .site-header {
+	display: none;
+}
+
+.tribe-events-style-full .control-header-height .site-header {
+	display: none;
+}
+
+.tribe-events-style-full .tribe-events-single {
+	text-align: center;
+	color: rgba(0, 0, 0, 0.7);
+}
+
+.tribe-events-style-full .tribe-events-single .tribe-events-back {
+	text-align: left;
+	padding: 0 1em;
+}
+
+.tribe-events-style-full .tribe-events-single .tribe_events {
+	display: block;
+}
+
+.tribe-events-style-full .tribe-events-single .tribe_events .tribe-events-meta-group + .tribe-events-meta-group + .tribe-events-meta-group-gmap {
+	display: none;
+}
+
+.tribe-events-style-full .tribe-events-single .tribe-events-schedule h2 {
+	margin: 0;
+}
+
+.tribe-events-style-full .tribe-events-single .tribe-events-schedule .tribe-events-cost {
+	display: none;
+}
+
+.tribe-events-style-full .tribe-events-single .tribe-events-event-meta .column, .tribe-events-style-full .tribe-events-single .tribe-events-event-meta .tribe-events-event-meta .tribe-events-meta-group {
+	display: block;
+	float: none;
+	width: 100%;
+}
+
+.tribe-events-style-full .tribe-events-single .tribe-events-event-meta .tribe-events-single-section-title {
+	font-size: 1.5rem;
+}
+
+.tribe-events-style-full .tribe-events-single .tribe-events-event-meta dl {
+	font-size: 1.25rem;
+	padding: 0 .5em;
 }
 
 /*--------------------------------------------------------------
@@ -2208,16 +2253,22 @@ Header Menu
 	text-align: center;
 	font-size: 2rem;
 	font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
-	color: rgba(0, 0, 0, 0.65);
 	margin-bottom: 2em;
 }
 
-.entry-content > .cart-checkout-header .active {
+.entry-content > .cart-checkout-header a {
+	color: #777;
 	opacity: .5;
 }
 
-.entry-content > .cart-checkout-header .active:hover {
+.entry-content > .cart-checkout-header a.active {
+	color: #000;
 	opacity: 1;
+}
+
+.entry-content > .cart-checkout-header span {
+	color: #777;
+	opacity: .5;
 }
 
 .entry-content > .cart-checkout-header i {
@@ -2228,6 +2279,11 @@ Header Menu
 .woocommerce,
 .woocommerce-page {
 	font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+}
+
+.woocommerce .control-header-height,
+.woocommerce-page .control-header-height {
+	max-height: 100%;
 }
 
 .woocommerce .woocommerce-info,
@@ -2340,6 +2396,33 @@ Header Menu
 	border-bottom: 2px solid #e1e1e1;
 }
 
+.woocommerce .cart .quantity,
+.woocommerce-page .cart .quantity {
+	text-align: center;
+}
+
+.woocommerce .cart .quantity .qty,
+.woocommerce-page .cart .quantity .qty {
+	width: 2.5em;
+	padding: .5em 0;
+	vertical-align: middle;
+}
+
+.woocommerce .cart .quantity .minus,
+.woocommerce .cart .quantity .plus,
+.woocommerce-page .cart .quantity .minus,
+.woocommerce-page .cart .quantity .plus {
+	border: none;
+	padding: 0.5em;
+	background: none;
+	font-weight: 700;
+	font-size: .95rem;
+}
+
+.archive .cart .quantity {
+	display: none;
+}
+
 .woocommerce .woocommerce-products-header__title,
 .woocommerce-page .woocommerce-products-header__title {
 	color: #e0474c;
@@ -2349,6 +2432,11 @@ Header Menu
 .woocommerce-page .woocommerce-LoopProduct-link img {
 	border-bottom: 1px solid #e2e2e2;
 	padding: .5em;
+}
+
+.woocommerce ul.products p.stock,
+.woocommerce-page ul.products p.stock {
+	display: none;
 }
 
 .woocommerce ul.products li.product,
@@ -2419,6 +2507,19 @@ Header Menu
 	font-size: 1.05em;
 }
 
+.single-product div.product form.cart {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+}
+
+.single-product div.product form.cart .stock {
+	display: none;
+}
+
 .single-product #content div.product div.images {
 	width: 36%;
 	margin-right: 1em;
@@ -2436,7 +2537,7 @@ Header Menu
 
 .single-product #content div.product div.summary {
 	float: none;
-	width: 80%;
+	width: 100%;
 }
 
 .single-product .woocommerce-product-details__short-description {
@@ -2507,6 +2608,84 @@ Header Menu
 	background-color: #b11a21;
 }
 
+.social-share-wrapper {
+	display: none;
+}
+
+.single-product .social-share-wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+}
+
+.single-product .social-share-wrapper div {
+	margin-right: .25em;
+}
+
+.single-product .social-share-wrapper .share-on {
+	font-size: 1rem;
+}
+
+.single-product .social-share-wrapper .facebook,
+.single-product .social-share-wrapper .twitter,
+.single-product .social-share-wrapper .pinterest,
+.single-product .social-share-wrapper .googleplus {
+	font-size: .75rem;
+	padding: .2em .45em .2em .2em;
+	border-radius: 3px;
+}
+
+.single-product .social-share-wrapper .facebook {
+	background: #3B5998;
+}
+
+.single-product .social-share-wrapper .facebook a {
+	color: #fff;
+}
+
+.single-product .social-share-wrapper .facebook i {
+	padding: 0 .25em;
+}
+
+.single-product .social-share-wrapper .twitter {
+	background: #1DA1F2;
+}
+
+.single-product .social-share-wrapper .twitter a {
+	color: #fff;
+}
+
+.single-product .social-share-wrapper .twitter i {
+	padding: 0 .25em;
+}
+
+.single-product .social-share-wrapper .pinterest {
+	background: #BD081C;
+}
+
+.single-product .social-share-wrapper .pinterest a {
+	color: #fff;
+}
+
+.single-product .social-share-wrapper .pinterest i {
+	padding: 0 .25em;
+}
+
+.single-product .social-share-wrapper .googleplus {
+	background: #DB4437;
+}
+
+.single-product .social-share-wrapper .googleplus a {
+	color: #fff;
+}
+
+.single-product .social-share-wrapper .googleplus i {
+	padding: 0 .25em;
+}
+
 .woocommerce-cart .site {
 	background: #f5f5f5;
 }
@@ -2523,8 +2702,19 @@ Header Menu
 	display: none;
 }
 
+.woocommerce-cart .woocommerce .woocommerce-error {
+	color: #b81c23;
+	font-size: .95rem;
+}
+
+.woocommerce-cart .woocommerce .woocommerce-error li {
+	margin-bottom: .25em;
+}
+
 .woocommerce-cart .woocommerce .quantity .qty {
-	width: 2em;
+	width: 2.5em;
+	padding: .5em 0;
+	vertical-align: middle;
 }
 
 .woocommerce-cart .woocommerce .cart-empty {
@@ -2613,6 +2803,15 @@ Header Menu
 	-webkit-box-align: start;
 	    -ms-flex-align: start;
 	        align-items: flex-start;
+}
+
+.checkout .woocommerce-error {
+	color: #b81c23;
+	font-size: .95rem;
+}
+
+.checkout .woocommerce-error li {
+	margin-bottom: .25em;
 }
 
 .checkout .col2-set {
@@ -2848,7 +3047,8 @@ Header Menu
 
 @media screen and (min-width: 600px) {
 	.entry-title {
-		font-size: 2rem;
+		font-size: 3rem;
+		color: #fff;
 	}
 }
 
@@ -3263,6 +3463,38 @@ Header Menu
 	-webkit-box-pack: space-evenly;
 	    -ms-flex-pack: space-evenly;
 	        justify-content: space-evenly;
+	font-size: 1.25rem;
+}
+
+.footer-widgets .social-footer a:hover,
+.footer-widgets .social-footer a:focus {
+	border: none;
+	-webkit-animation: rotate .5s linear;
+	        animation: rotate .5s linear;
+}
+
+.footer-widgets .social-footer .fa-instagram {
+	padding: .25em;
+}
+
+.footer-widgets .social-footer .fa-instagram:hover {
+	color: #bc2a8d;
+}
+
+.footer-widgets .social-footer .fa-facebook {
+	padding: .25em;
+}
+
+.footer-widgets .social-footer .fa-facebook:hover {
+	color: #3B5998;
+}
+
+.footer-widgets .social-footer .fa-pinterest {
+	padding: .25em;
+}
+
+.footer-widgets .social-footer .fa-pinterest:hover {
+	color: #BD081C;
 }
 
 .site-info {
@@ -3318,6 +3550,12 @@ Header Menu
 	font-size: 1rem;
 }
 
+.mc4wp-form .mc4wp-alert.mc4wp-error p {
+	text-align: center;
+	color: #b11a21;
+	margin: 0;
+}
+
 /*--------------------------------------------------------------
 # Widgets
 --------------------------------------------------------------*/
@@ -3332,6 +3570,7 @@ Header Menu
 .widget ol {
 	margin-bottom: 0;
 	list-style-type: none;
+	padding: 0 1em;
 }
 
 .widget ul li,
@@ -3376,7 +3615,7 @@ Header Menu
 .widget-title {
 	margin-top: 0;
 	margin-bottom: .5em;
-	font-size: 1.25rem;
+	font-size: 1.15rem;
 }
 
 /* Archive and Categories widgets */
@@ -3403,9 +3642,8 @@ Header Menu
 .widget_pages a,
 .widget_nav_menu a {
 	display: block;
-	padding: 1em 0;
+	padding: .75em 0;
 	text-decoration: none;
-	border-bottom: 1px dashed gray;
 }
 
 .widget_pages a:hover, .widget_pages a:focus,
@@ -3418,7 +3656,7 @@ Header Menu
 .widget_pages li,
 .widget_nav_menu li {
 	padding: 0;
-	font-size: 1.1rem;
+	font-size: .95rem;
 }
 
 /* Meta widget */

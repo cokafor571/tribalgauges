@@ -47,11 +47,6 @@ input {
 				flex-direction: row-reverse;
 			}
 		}
-		&:not(.has-page-sidebar) {
-			.hentry {
-				justify-content: flex-end;
-			}
-		}
 	}
 }
 

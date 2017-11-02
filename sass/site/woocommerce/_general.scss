@@ -3,15 +3,21 @@
     text-align: center;
     font-size: 2rem;
     font-family: $font__sans;
-    color: rgba( 0,0,0,.65 );
     margin-bottom: 2em;
 
-    .active {
+    a {
+        color: #777;
         opacity: .5;
 
-        &:hover {
+        &.active {
+            color: #000;
             opacity: 1;
         }
+    }
+
+    span {
+        color: #777;
+        opacity: .5;
     }
 
     i {
@@ -24,6 +30,11 @@
 .woocommerce,
 .woocommerce-page {
     font-family: $font__sans;
+
+    //reverse page-height
+    .control-header-height {
+        max-height: 100%;
+    }
 
     //info
     .woocommerce-info {
@@ -113,4 +124,32 @@
             }
         }
     }
+
+    //+/- buttons and quantity field
+    .cart {
+
+        .quantity {
+            text-align: center;
+
+            .qty {
+                width: 2.5em;
+                padding: .5em 0;
+                vertical-align: middle;
+            }
+
+            .minus,
+            .plus {
+                border: none;
+                padding: 0.5em;
+                background: none;
+                font-weight: 700;
+                font-size: .95rem;
+            }
+        }
+    }
+}
+
+//shop archive pages no input
+.archive .cart .quantity {
+    display: none;
 }

@@ -312,9 +312,13 @@
 
       .dropdown-cart-right {
 
-        h5 {
-          font-size: .8rem;
-          margin: .25em 0;
+        a {
+          font-size: .85rem;
+          color: #777;
+
+          &:hover {
+            color: #330030
+          }
         }
 
         p {

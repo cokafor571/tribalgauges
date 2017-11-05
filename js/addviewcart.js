@@ -2,16 +2,17 @@
         $('.ajax_add_to_cart').click(function(e) {
 		e.preventDefault();
 		var prodID = $(this).attr('data-product_id');
+        var production_id = $('input[name="product_id"]').val();
         var variation_id = $('input[name="variation_id"]').val();
         var quantity = $('input[name="quantity"]').val();
         $(this).addClass('adding-cart');
 		$('.cart-dropdown-inner').empty();
 
-        if (variation_id !== '') {
+        if (variation_id) {
             $.ajax ({
                 url: starterpack_ajax_object.ajax_url,
                 type:'POST',
-                data:'action=starterpack_add_cart&prodID=' + prodID + '&variation_id=' + variation_id + '&quantity=' + quantity,
+                data:'action=starterpack_add_cart&prodID=' + production_id + '&variation_id=' + variation_id + '&quantity=' + quantity,
 
                 success:function(results) {
                     $('.cart-dropdown-inner').html(results);

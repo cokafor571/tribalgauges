@@ -78,6 +78,7 @@ function starterpack_setup() {
         'flex-width' => true,
     ));
 
+	add_theme_support( 'woocommerce' );
     add_theme_support( 'wc-product-gallery-zoom' );
     add_theme_support( 'wc-product-gallery-lightbox' );
     add_theme_support( 'wc-product-gallery-slider' );
@@ -86,6 +87,26 @@ function starterpack_setup() {
 endif;
 
 add_action( 'after_setup_theme', 'starterpack_setup' );
+
+/*
+* Hook into woocommerce if not using inc/woocommerce method
+*
+*
+remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10);
+remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10);
+
+add_action('woocommerce_before_main_content', 'starterpack_wrapper_start', 10);
+add_action('woocommerce_after_main_content', 'starterpack_wrapper_end', 10);
+
+function starterpack_wrapper_start() {
+  echo '<section id="main">';
+}
+
+function starterpack_wrapper_end() {
+  echo '</section>';
+}
+*/ 
+
 
 /**
  * Register custom fonts.
@@ -365,8 +386,8 @@ require get_template_directory() . '/inc/jetpack.php';
 
 /**
 * Load WooCommerce compatibility file. 
-*/ 
-require get_template_directory() . '/inc/woocommerce.php';
+*
+require get_template_directory() . '/inc/woocommerce.php'; */
 
 /**
  * Load SVG compatability
@@ -444,7 +465,6 @@ function kia_add_script_to_footer(){
 add_action( 'wp_footer', 'kia_add_script_to_footer' );
 
 
-
 /**
  * Ensure cart contents update when products are added to the cart via AJAX
  */
@@ -482,7 +502,12 @@ function add_custom_loop_add_to_cart() {
 
 	if ( $product->is_in_stock() ) :
 
-		do_action( 'woocommerce_before_add_to_cart_form' ); ?>
+		do_action( 'woocommerce_before_add_to_cart_form' ); 
+
+		if ($product->product_type == "variable" ) {
+			woocommerce_variable_add_to_cart();
+		}
+		else { ?>
 
 		<form class="cart" method="post" enctype='multipart/form-data'>
 			<?php
@@ -523,7 +548,9 @@ function add_custom_loop_add_to_cart() {
 			?>
 		</form>
 
-	<?php endif; 
+		<?php } // end else
+
+	endif; 
 	
 }
 
@@ -538,10 +565,11 @@ add_filter('woocommerce_loop_add_to_cart_link', 'custom_woo_loop_add_to_cart_lin
 function starterpack_add_cart_ajax() {
 	$prodID = $_POST['prodID'];
 	$quantity = $_POST['quantity'];
+	$production_id = $_POST['production_id'];
 	$variation_id = $_POST['variation_id'];
 
 	if ($variation_id) {
-        WC()->cart->add_to_cart( $prodID, $quantity, $variation_id );
+        WC()->cart->add_to_cart( $production_iD, $quantity, $variation_id );
     } else {
         WC()->cart->add_to_cart( $prodID, $quantity);
     }
@@ -561,12 +589,22 @@ function starterpack_add_cart_ajax() {
 			</div>
 
 			<div class="dropdown-cart-right">
-				<h5><?php echo $_product->post_title; ?></h5>
+				<a href="<?php echo get_permalink($_product->ID); ?>"><?php echo $_product->post_title; ?></a>
 				<p class="price-amount"><?php echo $cart_item['quantity']; ?> <span>x</span>
 				<?php global $woocommerce;
 				$currency = get_woocommerce_currency_symbol();
-				$price = get_post_meta( $cart_item['product_id'], '_regular_price', true);
-				$sale = get_post_meta( $cart_item['product_id'], '_sale_price', true);
+
+				if ($variation) {
+					$price = get_post_meta( $cart_item['variation_id'], '_regular_price', true);
+				} else {
+					$price = get_post_meta( $cart_item['product_id'], '_regular_price', true);
+				}
+
+				if ($variation) {
+					$sale = get_post_meta( $cart_item['variation_id'], '_sale_price', true);
+				} else {
+					$sale = get_post_meta( $cart_item['product_id'], '_sale_price', true);
+				}
 				?>
 				 
 				<?php if($sale) { ?>
@@ -621,6 +659,7 @@ function new_loop_shop_per_page( $cols ) {
   $cols = 20;
   return $cols;
 }
+
 add_filter( 'loop_shop_per_page', 'new_loop_shop_per_page', 20 );
 
 

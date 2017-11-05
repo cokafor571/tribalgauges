@@ -56,7 +56,8 @@
                             <?php if ($items) { 
 
                             foreach($items as $item => $values) { 
-                                $_product = $values['data']->post; ?>
+                                $_product = $values['data']->post; 
+                                $url = get_permalink($product_id); ?>
                                 
                                 <div class="dropdown-cart-wrap">
                                     <div class="dropdown-cart-left">
@@ -69,12 +70,20 @@
                                     </div>
 
                                     <div class="dropdown-cart-right">
-                                        <h5><?php echo $_product->post_title; ?></h5>
+                                        <!--<?php echo '<a href="'.$url.'">'.get_the_title($product_id).'</a>'; ?>-->
+                                        <!--<h5><?php echo $_product->post_title; ?></h5> -->
+                                        <a href="<?php echo get_permalink($_product->ID); ?>"><?php echo $_product->post_title; ?></a>
                                         <p class="price-amount"><?php echo $values['quantity']; ?> <span>x</span> 
                                         <?php global $woocommerce;
                                         $currency = get_woocommerce_currency_symbol();
-                                        $price = get_post_meta( $values['product_id'], '_regular_price', true);
-                                        $sale = get_post_meta( $values['product_id'], '_sale_price', true);
+
+                                        if ($variation) {
+                                            $price = get_post_meta( $values['variation_id'], '_regular_price', true);
+                                            $sale = get_post_meta( $values['variation_id'], '_sale_price', true);
+                                        } else {
+                                            $price = get_post_meta( $values['product_id'], '_regular_price', true);
+                                            $sale = get_post_meta( $values['product_id'], '_sale_price', true);
+                                        }
                                         ?>
                                         
                                         <?php if($sale) { ?>

@@ -10,11 +10,16 @@
     }
 
     h1 {
-        font-size: 1.4rem;
-        width: 80%;
+        font-size: 1.1rem;
+        width: 95%;
         margin: 0 auto;
         text-align: center;
         font-weight: 400;
+
+        @media screen and ( min-width: $query__small ) {
+            font-size: 1.4rem;
+            width: 80%;
+        }
     }
 
     .info-buttons {
@@ -30,11 +35,16 @@
                 background: transparent;
                 border: 2px solid #303030;
                 letter-spacing: 1px;
-                padding: 15px 100px;
+                padding: 15px 40px;
                 font-family: $font__sans;
-                font-size: .9rem;
+                font-size: .8rem;
                 color: #303030;
                 transition: all .25s linear;
+
+                @media screen and ( min-width: $query__small ) {
+                    padding: 15px 100px;
+                    font-size: .9rem;
+                }
 
                 &:hover {
                     background: #303030;
@@ -57,10 +67,14 @@
         li {
             position: relative;
             list-style: none;
-            min-width: 400px;
+            min-width: 275px;
             flex: 1;
             margin: 0 1px 1px 0;
             overflow: hidden;
+
+            @media screen and ( min-width: 819px  ) {
+                min-width: 400px;
+            }
 
             @include dark-background-invisible;
 
@@ -175,48 +189,73 @@
 
 //accessories
 .accessories-block {
-    display: flex;
+    display: block;
     padding-top: 1em;
     max-width: 1280px;
     margin: 0 auto;
     align-items: center;
 
-    &.animate-element {
-        animation: appear 1.25s linear both;
+    @media screen and ( min-width: $query__small ) {
+        display: flex;
     }
 
     img {
         display: block;
         margin: 0 auto;
+        width: 30%;
+
+        @media screen and ( min-width: $query__small ) {
+            width: 30%;
+        }
+
+        @media screen and ( min-width: $query__medium ) {
+            width: auto;
+        }
     }
 
     .accessories {
-        margin: 0 auto;
+        margin: 0 auto 1em;
         text-align: center;
 
+        @media screen and ( min-width: $query__small ) {
+            margin: 0 auto;
+        }
+
         h2 {
-            font-size: 2rem;
+            font-size: 1.5rem;
             text-align: center;
             color: rgba(0,0,0,.8);
             @include title-uline( $line-width: 60px );
             margin: 0 0 1em;
+
+            @media screen and ( min-width: $query__medium ) {
+                font-size: 2rem;
+            }
         }
 
         p {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             color: rgba(0,0,0,.8);
+
+            @media screen and ( min-width: $query__medium ) {
+                font-size: 1.25rem;
+            }
         }
 
         a {
             background: $color__site-red-deep;
             color: #fff;
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             padding: 10px 25px;
             border: none;
             transition: transform .3s linear;
             display: inline-block;
             font-family: $font__sans;
             border-radius: 3px;
+
+            @media screen and ( min-width: $query__medium ) {
+                font-size: 1.25rem;
+            }
 
             &:hover {
                 transform: scale(1.1);
@@ -244,16 +283,29 @@
         list-style: none;
         padding: 0;
         margin: 0;
+        flex-wrap: wrap;
+
+        @media screen and ( min-width: 769px ) {
+            flex-wrap: nowrap;
+        }
 
         li {
             margin: 1em;
+
+            img {
+                min-width: 75px;
+            }
         }
     }
 }
 
 //events bag piercing
 .events-free-piercing {
-    display: flex;
+    display: block;
+
+    @media screen and ( min-width: $query__small ) {
+        display: flex;
+    }
 
     .events {
         flex: 1;
@@ -261,12 +313,20 @@
         text-align: center;
 
         h2 {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             word-spacing: .15em;
+
+            @media screen and ( min-width: $query__small ) {
+                font-size: 1.5rem;
+            }
         }
 
         p {
-            font-size: 1.1rem;
+            font-size: 1rem;
+
+            @media screen and ( min-width: $query__small ) {
+                font-size: 1.1rem;
+            }
         }
 
         a {
@@ -309,15 +369,23 @@
     .free-bag {
         display: flex;
         flex-direction: column;
-        padding: 2em 1em;
+        padding: 2em 0;
         align-items: center;
         flex: 1;
 
+        @media screen and ( min-width: $query__small ) {
+            padding: 2em 1em;
+        }
+
         h2 {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             text-align: center;
             margin: 1em 0;
             color: rgba( 0,0,0,.7 );
+
+            @media screen and ( min-width: 769px ) {
+                font-size: 1.25rem;
+            }
         }
 
         img {
@@ -328,11 +396,15 @@
     }
     
     .piercing-care {
-        padding: 1em;
+        padding: 0;
         flex: 1;
         justify-content: center;
         display: flex;
         align-items: flex-end;
+
+        @media screen and ( min-width: $query__small ) {
+            padding: 1em;
+        }
 
         .piercing-scale {
             display: flex;
@@ -351,10 +423,14 @@
     }
         
     h2 {
-        font-size: 1.25rem;
+        font-size: 1.1rem;
         text-align: center;
         margin: 1em 0;
         color: rgba( 0,0,0,.7 );
+
+        @media screen and ( min-width: 769px ) {
+            font-size: 1.25rem;
+        }
     }
 
     img {

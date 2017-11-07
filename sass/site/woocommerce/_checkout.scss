@@ -7,10 +7,14 @@
     }
 
     .woocommerce {
-        display: flex;
+        display: block;
         padding: 0 1em;
         margin-bottom: 3em;
         align-items: flex-start;
+
+        @media screen and ( min-width: 1000px ) {
+            display: flex;
+        }
 
         //kill messages 
         .woocommerce-message {
@@ -68,6 +72,14 @@
 
                 tbody {
                     background: #fff;
+
+                    .product-name a {
+                        font-size: .85rem;
+
+                        @media screen and ( min-width: $query__small ) {
+                            font-size: 1rem;
+                        }
+                    }
                 }
 
                 img {
@@ -123,9 +135,13 @@
 
 //checkout
 .checkout {
-    display: flex;
+    display: block;
     padding: 0 2em;
     align-items: flex-start;
+
+    @media screen and ( min-width: $query__medium ) {
+        display: flex;
+    }
 
     .woocommerce-error {
         color: #b81c23;
@@ -175,15 +191,27 @@
             float: none;
             width: 100%;
             margin-bottom: 3em;
+
+            h3 {
+                font-size: 1.25rem;
+
+                @media screen and ( min-width: $query__small ) {
+                    font-size: 2.15rem;
+                }
+            }
         }
     }
 
     .woocommerce-checkout-review-order {
-        margin-left: 2em;
+        margin: 0 0 1em 0;
         border: 2px solid #446084;
         padding: 15px 30px 30px;
         font-size: 1rem;
         color: rgba(0,0,0,.8);
+
+        @media screen and ( min-width: $query__medium ) {
+            margin-left: 2em;
+        }
 
         h3 {
             margin: 0 0 1em;
@@ -193,13 +221,25 @@
 
         .woocommerce-checkout-review-order-table {
             border: none;
+
+            .product-name {
+                font-size: .85rem;
+
+                @media screen and ( min-width: $query__medium ) {
+                    font-size: 1rem;
+                }
+            }
         }
     }
 }
 
 //cart quantity space
 .woocommerce table.shop_table td.product-quantity {
-    padding: 6px 0;
+    padding: 6px 12px;
+
+    @media screen and ( min-width: 769px ) {
+        padding: 6px 0;
+    }
 }
 
 //display none checkout header 1 of 2

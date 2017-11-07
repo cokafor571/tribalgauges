@@ -8,25 +8,77 @@
 
 .piercing-care-page {
     display: flex;
+    flex-direction: column-reverse;
     align-items: center;
+
+    @media screen and ( min-width: $query__small ) {
+        display: block;
+    }
+
+    @media screen and ( min-width: 1060px ) {
+        display: flex;
+        flex-direction: row;
+    }
 
     img,
     .piercing-text {
         flex: 1;
     }
 
+    img {
+        width: 100%;
+        margin: 0;
+        display: block;
+
+        @media screen and ( min-width: $query__small ) {
+            width: 70%;
+            margin: 1em auto 0;
+        }
+
+        @media screen and ( min-width: 1060px ) {
+            display: flex;
+            margin: 0;
+        }
+    }
+
     .piercing-text {
-        padding: 2em;
+        padding: 1em;
+        background: #f6f6f6;
+        position: relative;
+        z-index: 1;
+        top: 0;
+        width: 100%;
+        margin: 0 auto;
+
+        @media screen and ( min-width: 720px ) {
+            width: 50%;
+            top: -50px;
+        }
+
+        @media screen and ( min-width: 1060px ) {
+            background: none;
+            width: auto;
+            top: 0;
+            margin: 0;
+        }
 
         h1 {
             margin: 0;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             color: rgba(0,0,0,.7);
+
+            @media screen and ( min-width: $query__small ) {
+                font-size: 1.5rem;
+            }
         }
 
         p {
-            font-size: 1.05rem;
+            font-size: .95rem;
             margin: 2em 0;
+
+            @media screen and ( min-width: $query__small ) {
+                font-size: 1.05rem;
+            }
         }
 
         a {

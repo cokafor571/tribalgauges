@@ -11,7 +11,7 @@
 
     $( '.fa-times' ).on( 'click', function() {
         $( '.control-header-height' ).css({
-            transform: 'translate3d(0,-40px,0)'
+            top: '-40px'
         });
         //sessionStorage.setItem('tripHeader', 'none');
     });

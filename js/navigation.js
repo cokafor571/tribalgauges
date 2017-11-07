@@ -11,7 +11,7 @@
     function initMainNavigation( container ) {
 
         // Add dropdown toggle that displays child menu items.
-        var dropdownToggle = $( '<span />', { 'class': 'dropdown-symbol', html: '<i class="fa fa-angle-down" aria-hidden="true"></i>' , 'aria-expanded': false })
+       var dropdownToggle = $( '<span />', { 'class': 'dropdown-symbol', text: '▼' , 'aria-expanded': false })
             .append( $( '<span />', { 'class': 'screen-reader-text', text: starterpackScreenReaderText.expand }) );
 
         container.find( '.menu-item-has-children > a, .page_item_has_children > a' ).after( dropdownToggle );
@@ -23,13 +23,13 @@
             }
         });
 
-        if ( $(window).width() < 600 ) {
+        if ( $(window).width() < 1025 ) {
         
             container.find( '.menu-item-has-children > a, .menu-item-has-children > span' ).click( function( e ) {
                 var _this = $(this).parent( '.menu-item-has-children' ),
                     screenReaderSpan = _this.find( '.screen-reader-text' );
                     dropdownSymbol = _this.find( '.dropdown-symbol' );
-                    dropdownSymbol.html( dropdownSymbol.html() === '<i class="fa fa-angle-right" aria-hidden="true"></i>' ? '<i class="fa fa-angle-down" aria-hidden="true">' : '<i class="fa fa-angle-right" aria-hidden="true"></i>' );
+                    dropdownSymbol.text( dropdownSymbol.text() === '►' ? '▼' : '►' );
 
                 e.preventDefault();
 
@@ -44,11 +44,11 @@
             });
         } else {
             
-            container.find( '.menu-item-has-children > a, .menu-item-has-children > span' ).click( function( e ) {
-                var _this = $(this).parent( '.menu-item-has-children' ),
+            container.find( '.menu-item-has-children' ).hover( function( e ) {
+                var _this = $(this),
                     screenReaderSpan = _this.find( '.screen-reader-text' );
                     dropdownSymbol = _this.find( '.dropdown-symbol' );
-                    dropdownSymbol.html( dropdownSymbol.html() === '<i class="fa fa-angle-right" aria-hidden="true"></i>' ? '<i class="fa fa-angle-down" aria-hidden="true">' : '<i class="fa fa-angle-right" aria-hidden="true"></i>' );
+                    dropdownSymbol.text( dropdownSymbol.text() === '►' ? '▼' : '►' );
 
                 e.preventDefault();
 

@@ -620,7 +620,7 @@ function starterpack_add_cart_ajax() {
 
 	<div class="dropdown-cart-wrap dropdown-cart-subtotal">
 		<div class="dropdown-cart-left">
-			<h6>Subtotal</h6>
+			<h6>Subtotal:</h6>
 		</div>
 
 		<div class="dropdown-cart-right">

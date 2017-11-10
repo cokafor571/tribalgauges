@@ -32,9 +32,16 @@
   position: relative;
 
   @media screen and (min-width: $query__small) {
-    height: 32vh;
+    height: 35vh;
   }
 
+  @media screen and (min-width: 1025px) {
+    height: 45vh;
+  }
+}
+
+.page-id-4 .header-image {
+  
   @media screen and (min-width: 1025px) {
     height: 56vh;
   }

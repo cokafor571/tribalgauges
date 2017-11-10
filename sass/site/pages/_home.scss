@@ -160,7 +160,7 @@
         .overlay-text {
             position: absolute;
             z-index: 2;
-            top: 40%;
+            top: 35%;
             color: #fff;
             opacity: 0;
             transition: all .25s linear;
@@ -187,46 +187,122 @@
     }
 }
 
+//featured products 
+.featured-products {
+    background: $color__site-brown-white;
+
+    h2 {
+        margin: 0;
+        padding: .75em 0;
+        font-size: 1.75rem;
+        text-align: center;
+
+        @media screen and ( min-width: $query__small ) {
+            padding: 1em 0;
+            font-size: 2.25rem;
+        }
+    }
+
+    .columns-5 {
+
+        .products {
+            margin: 0;
+            padding: 0 .5em;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+
+            @media screen and ( min-width: 1025px ) {
+                display: block;
+            }
+
+            .quantity {
+                display: none;
+            }
+
+            .product  {
+                flex-basis: 45%;
+
+                @media screen and ( min-width: 550px ) {
+                    flex-basis: 30%;
+                }
+
+                @media screen and ( min-width: 769px ) {
+                    flex-basis: 25%;
+                }
+            
+                img {
+                    border: none;
+                    text-decoration: none;
+                    
+                    &:hover {
+                        transform: scale(1.05);
+                    }
+                }
+
+                .woocommerce-loop-product__link:hover img {
+                    border: none;
+                }
+            }
+        }
+    }
+}
+
 //accessories
 .accessories-block {
-    display: block;
-    padding-top: 1em;
+    display: flex;
     max-width: 1280px;
     margin: 0 auto;
     align-items: center;
+    position: relative;
+    flex-direction: column-reverse;
+    justify-content: center;
 
     @media screen and ( min-width: $query__small ) {
-        display: flex;
+        flex-direction: row;
     }
 
-    img {
-        display: block;
-        margin: 0 auto;
-        width: 30%;
+    .accessory-img {
+        width: 100%;
+        @include dark-background( $background-color: rgba( 0,0,0,.5 ) );
 
         @media screen and ( min-width: $query__small ) {
-            width: 30%;
+            position: relative;
+            @include dark-background( $background-color: rgba( 0,0,0,.075 ) );
         }
-
-        @media screen and ( min-width: $query__medium ) {
-            width: auto;
+       
+        img {
+            display: block;
         }
     }
 
     .accessories {
         margin: 0 auto 1em;
         text-align: center;
+        position: absolute;
+        width: 100%;
+        z-index: 1;
 
         @media screen and ( min-width: $query__small ) {
-            margin: 0 auto;
+            position: relative;
+            opacity: 0;
+
+            &.animate-element {
+                animation: translateLeft 1s linear both, appear 1s linear both;
+            }
         }
 
         h2 {
             font-size: 1.5rem;
             text-align: center;
-            color: rgba(0,0,0,.8);
-            @include title-uline( $line-width: 60px );
+            color: #fff;
+            @include title-uline( $line-width: 60px, $line-color:#fff );
             margin: 0 0 1em;
+
+            @media screen and ( min-width: $query__small ) {
+                color: rgba(0,0,0,.8);
+                @include title-uline( $line-width: 60px, $line-color: rgba(0,0,0,.5) );
+            }
 
             @media screen and ( min-width: $query__medium ) {
                 font-size: 2rem;
@@ -235,7 +311,11 @@
 
         p {
             font-size: 1.1rem;
-            color: rgba(0,0,0,.8);
+            color: #fff;
+
+            @media screen and ( min-width: $query__small ) {
+                color: rgba(0,0,0,.8);
+            }
 
             @media screen and ( min-width: $query__medium ) {
                 font-size: 1.25rem;
@@ -243,22 +323,30 @@
         }
 
         a {
-            background: $color__site-red-deep;
+            margin: .5em 0;
+            background: transparent;
+            letter-spacing: .75px;
+            border: 2px solid #fff;
             color: #fff;
-            font-size: 1.1rem;
-            padding: 10px 25px;
-            border: none;
-            transition: transform .3s linear;
+            font-size: 1.05rem;
+            padding: 8px 25px;
+            transition: all .25s linear;
             display: inline-block;
             font-family: $font__sans;
-            border-radius: 3px;
+            border-radius: 2px;
+            
+            @media screen and ( min-width: $query__small ) {
+                border: 2px solid #303030;
+                color: #303030;
+            }
 
             @media screen and ( min-width: $query__medium ) {
-                font-size: 1.25rem;
+                font-size: 1.15rem;
             }
 
             &:hover {
-                transform: scale(1.1);
+                background: #303030;
+                color: #fff;
             }
         }
     }
@@ -272,8 +360,12 @@
     h2 {
         font-size: 1.5rem;
         text-align: center;
-        margin: 0;
+        margin: 0 0 .5em;
         padding: 1em 0 0;
+
+        @media screen and ( min-width: 567px ) {
+            margin: 0;
+        }
     }
 
     ul {
@@ -293,7 +385,12 @@
             margin: 1em;
 
             img {
-                min-width: 75px;
+                width: 75%;
+
+                @media screen and ( min-width: 470px ) {
+                    min-width: 75px;
+                    width: 100%;
+                }
             }
         }
     }
@@ -311,6 +408,14 @@
         flex: 1;
         color: rgba(0,0,0,.7);
         text-align: center;
+
+        @media screen and ( min-width: $query__small ) {
+            opacity: 0;
+            
+            &.animate-element {
+                animation: translateRight 1s linear both, appear 1s linear both;
+            }
+        }
 
         h2 {
             font-size: 1.25rem;
@@ -340,8 +445,17 @@
             }
 
             img {
-                transform: scale(.8);
-                transition: opacity .2s linear
+                width: 50%;
+                transition: opacity .2s linear;
+
+                @media screen and ( min-width: 769px ) {
+                    width: 75%
+                }
+
+                @media screen and ( min-width: 1025px ) {
+                    transform: scale(.8);
+                    width: 100%
+                }
             }
         }
 
@@ -363,7 +477,7 @@
         display: flex;
         overflow: hidden;
         flex: 1;
-        background: linear-gradient(150deg,#f5debc 40%, #c9e8a3 100%);
+        background: $color__site-wheat-soft;
     }
 
     .free-bag {

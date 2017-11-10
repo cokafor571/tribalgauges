@@ -233,6 +233,19 @@
     }
 }
 
+//orders
+.woocommerce-order {
+    padding: 0 .5em;
+
+    .woocommerce-order-details__title {
+        font-size: 1.75rem;
+
+        @media screen and ( min-width: $query__small ) {
+            font-size: 2.5rem;
+        }
+    }
+}
+
 //cart quantity space
 .woocommerce table.shop_table td.product-quantity {
     padding: 6px 12px;
@@ -245,4 +258,18 @@
 //display none checkout header 1 of 2
 .woocommerce .cart-checkout-header {
     display: none;
+}
+
+//shipping styles
+#shipping_method,
+.shipping_method {
+    font-size: .9rem;
+
+    .amount {
+        padding-left: .25em;
+    }
+
+    .woocommerce-shipping-calculator {
+        display: none;
+    }
 }

@@ -19,6 +19,24 @@ input {
 	}
 }
 
+//popup styles
+.pum.pum-theme-lightbox .pum-container {
+	padding: 0;
+	border: none;
+
+	p {
+		margin: 0;
+
+		img {
+			display: block;
+		}
+	}
+
+	&.pum-responsive {
+		width: 75%;
+	}
+}
+
 /* Single posts */
 @media screen and (min-width: $query__medium) {
 	.single.has-sidebar,

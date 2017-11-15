@@ -1,7 +1,7 @@
 (function( $ ) {
     $(window).on('scroll', function() { 
         var scrollTop = $(this).scrollTop(); 
-            accessoriesDistance = $('.accessories').offset().top - 650,
+            accessoriesDistance = $('.accessories').offset().top - 650;
             eventsDistance = $('.events').offset().top - 650;
 
         if ( scrollTop >= accessoriesDistance ) {

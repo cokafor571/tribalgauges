@@ -87,7 +87,11 @@
     font-family: $font__sans;
 
     .product_title {
-        font-size: 1.5rem;
+        font-size: 1.15rem;
+
+        @media screen and ( min-width: $query__small ) {
+            font-size: 1.5rem;
+        }
     }
 
     div.product {

@@ -65,9 +65,17 @@
     }
   }
 
-  //menu caret smaller
-  .menu span {
-    font-size: .75rem;
+  //menu caret smaller and menu font
+  .menu {
+    font-size: .945rem; 
+
+    @media screen and ( min-width: 1126px ) {
+      font-size: 1rem;
+    }    
+  
+    span {
+      font-size: .75rem;
+    }
   }
 
   ul {
@@ -271,7 +279,7 @@
   }
 
   @media screen and (min-width: 1025px) {
-    flex: 1;
+    flex: .85;
   }
 
   form {
@@ -285,6 +293,10 @@
     input {
       font-size: 1rem;
       border-radius: 0;
+
+      &[type="search"] {
+        width: 100%;
+      }
 
       &[type="submit"] {
         font-family: FontAwesome;
@@ -336,6 +348,7 @@
   right: 0;
   display: flex;
   align-items: center;
+  font-family: $font__sans;
 
   @media screen and (min-width: 1025px) {
     right: 20px;

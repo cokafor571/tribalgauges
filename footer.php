@@ -27,7 +27,7 @@
         
 		<div class="site-info">
 			&copy; Tribal Gauges 2017
-            <img src="https://tribalgauges.com/wp-content/uploads/2017/10/payment-cards.png'  ?>">
+            <img src="https://tribalgauges.com/wp-content/uploads/2017/10/payment-cards.png">
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->

@@ -295,12 +295,48 @@ add_action( 'widgets_init', 'starterpack_widgets_init' );
  * Enqueue scripts and styles.
  */
 function starterpack_scripts() {
-
-    wp_enqueue_script( 'closeheader', get_template_directory_uri() . '/js/closeheader.js', array(), '20171022', true );
 	
     // Enque google fonts: 
     wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Lato:400,700' );
 
+	// This stylesheet is minified
+	wp_enqueue_style( 'starterpack-style', get_stylesheet_uri() );
+
+	wp_enqueue_script( 'starterpack-navigation', get_template_directory_uri() . '/js/navigation.min.js', array( 'jquery' ), '20151215', true );
+    wp_localize_script( 'starterpack-navigation', 'starterpackScreenReaderText', array(
+        'expand' => __( 'Expand child menu', 'starterpack' ),
+        'collapse' => __( 'Collapse child menu', 'starterpack' ),
+    ) );
+
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}
+
+	if ( is_front_page() ) {
+		wp_enqueue_script( 'fpscripts', get_template_directory_uri() . '/js/fpscripts.min.js', array(), '20171022', true );
+	} else {
+		wp_enqueue_script( 'scripts', get_template_directory_uri() . '/js/scripts.min.js', array(), '20171022', true );
+	}
+
+	//move error notice on checkout page
+	global $wp_scripts; 
+	$wp_scripts->registered[ 'wc-checkout' ]->src =  get_template_directory_uri() . '/js/woocommerce/checkout.min.js';
+
+    wp_enqueue_script( 'addviewcart', get_template_directory_uri() . '/js/addviewcart.min.js', array(), '20171022', true );
+    wp_localize_script( 'addviewcart', 'starterpack_ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+
+    wp_enqueue_style( 'fa-icons', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' );
+
+	/*
+	* Development scripts and css
+	*
+	*
+	wp_enqueue_script( 'closeheader', get_template_directory_uri() . '/js/closeheader.js', array(), '20171022', true );
+	
+    // Enque google fonts: 
+    wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Lato:400,700' );
+
+	// May Need to unminify this stylesheet
 	wp_enqueue_style( 'starterpack-style', get_stylesheet_uri() );
 
 	// Full bleed images
@@ -335,6 +371,7 @@ function starterpack_scripts() {
     wp_localize_script( 'addviewcart', 'starterpack_ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 
     wp_enqueue_style( 'fa-icons', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' );
+	*/
 }
 add_action( 'wp_enqueue_scripts', 'starterpack_scripts' );
 

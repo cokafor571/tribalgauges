@@ -8,20 +8,20 @@
   transition: top .35s linear;
 
   @media screen and (min-width: $query__small) {
-    max-height: 75vh;
+    max-height: 65vh;
   }
 
   @media screen and (min-width: 1025px) {
-    max-height: 100vh;
+    max-height: 75vh;
   }
 }
 
 .site-header {
-  max-height: 100vh;
+  max-height: 75vh;
   overflow: hidden;
   position: relative;
 
-  background: url( 'https://tribalgauges.com/wp-content/uploads/2014/10/Black-Spirals.jpg' ) no-repeat;
+  background: url( 'https://tribalgauges.com/wp-content/uploads/2017/11/tribal-gauges-banner.jpg' ) no-repeat;
   background-size: cover;
   background-position: 30% 70%;
 }
@@ -31,21 +31,11 @@
   overflow: hidden;
   position: relative;
 
-  @media screen and (min-width: $query__small) {
-    height: 35vh;
-  }
-
   @media screen and (min-width: 1025px) {
-    height: 45vh;
+    height: 30vh;
   }
 }
 
-.page-id-4 .header-image {
-  
-  @media screen and (min-width: 1025px) {
-    height: 56vh;
-  }
-}
 
 //page header
 .header-group {

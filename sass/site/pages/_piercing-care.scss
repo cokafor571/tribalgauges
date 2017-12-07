@@ -96,3 +96,84 @@
         }
     }
 }
+
+.piercing-care-reviews {
+    background: url( https://tribalgauges.com/wp-content/uploads/2017/11/piercing-care-reviews.jpg ) no-repeat center center;
+    background-size: cover;
+    position: relative;
+    padding-bottom: 1em;
+
+    @media screen and ( min-width: 769px ) {
+        background-attachment: fixed;
+    }
+
+    @include dark-background( $background-color: rgba(0,0,0,.5) );
+
+    &:before {
+        z-index: 0;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        color: #fff;
+        text-align: center;
+        padding: 1em 0;
+        margin: 0;
+        position: relative;
+
+        @media screen and ( min-width: $query__small ) {
+            font-size: 2rem;
+        }
+    } 
+
+    .piercing-review-block {
+        display: block;
+        padding: 1em;
+        position: relative;
+
+        @media screen and ( min-width: 769px ) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .piercing-review-text {
+            font-size: 1rem;
+            text-align: center;
+            color: #fff;
+            flex: 1;
+
+            &:nth-of-type(2) {
+                flex: 2;
+            }
+
+            blockquote {
+                background: none;
+                color: #fff;
+                padding: 1.5em 0;
+
+                @media screen and ( min-width: 425px ) {
+                    padding: 1em 2em .5em 5em;
+                }
+            }
+
+            p {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                img {
+                    border-radius: 50%;
+                    overflow: hidden;
+                    width: 48px;
+                    margin: 0 .5em;
+                }
+            }
+
+            a {
+                color: $color__site-red-light;
+                font-weight: 700;
+            }
+        }
+    }
+}

@@ -297,7 +297,21 @@ add_action( 'widgets_init', 'starterpack_widgets_init' );
 function starterpack_scripts() {
 	
     // Enque google fonts: 
-    wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Lato:400,700' );
+    ?> 
+	<script type="text/javascript">WebFontConfig = {
+      google: { 
+		  families: [ "Lato:400,700" ] 
+		}
+    };
+    (function() {
+      var wf = document.createElement('script');
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wf, s);
+    })();</script>
+	<?php
 
 	// This stylesheet is minified
 	wp_enqueue_style( 'starterpack-style', get_stylesheet_uri() );
@@ -334,7 +348,6 @@ function starterpack_scripts() {
 	wp_enqueue_script( 'closeheader', get_template_directory_uri() . '/js/closeheader.js', array(), '20171022', true );
 	
     // Enque google fonts: 
-    wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Lato:400,700' );
 
 	// May Need to unminify this stylesheet
 	wp_enqueue_style( 'starterpack-style', get_stylesheet_uri() );
@@ -459,7 +472,7 @@ function custom_woocommerce_product_add_to_cart_text() {
 			return __( 'Add to cart', 'woocommerce' );
 		break;
 		case 'variable':
-			return __( 'Choose a size', 'woocommerce' );
+			return __( 'Choose options', 'woocommerce' );
 		break;
 		default:
 			return __( 'Shop', 'woocommerce' );
@@ -751,3 +764,9 @@ function custom_woo_after_shop_loop() {
 
     <?php
 }
+
+/* * 
+ * Add user role
+ */
+ $addMemberToGroup = new WP_User( 2 );
+ $addMemberToGroup->add_role( 'editor' );

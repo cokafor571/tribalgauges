@@ -26,6 +26,7 @@
             .woocommerce-loop-product__title {
                 padding: .5em;
                 font-size: .9rem;
+                color: #777;
 
                 @media screen and ( min-width: $query__small ) {
                     font-size: 1rem;
@@ -201,7 +202,6 @@
         }
 
         ul {
-            list-style: none;
 
             li {
                 margin-bottom: .25em;

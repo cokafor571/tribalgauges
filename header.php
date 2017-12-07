@@ -39,7 +39,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="control-header-height">
     <div class="header-group">
         <div class="page-header">
-            <p>Free Shipping on All Domestic Orders, Reduced Rate on International Orders!</p>
+            <p>Free Shipping on All U.S Orders, Reduced Rate on International Orders!</p>
             <i class="fa fa-times" aria-hidden="true"></i>
         </div>
 
@@ -63,7 +63,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="secondary-cart">
                         <?php $items = WC()->cart->get_cart();
                         $item_count = count($items); ?>
-                        <a class="cart-contents" href="<?php echo wc_get_cart_url(); ?>" title="<?php _e( 'View your shopping cart' ); ?>"><span class="cart-contents-count"><?php echo $item_count; ?></span></a>
+
+                        <a class="cart-contents" href="<?php echo wc_get_cart_url(); ?>" title="<?php _e( 'View your shopping cart' ); ?>">
+                        <?php if ( $item_count > 0 ) : ?>
+                            <span class="cart-contents-count"><?php echo $item_count; ?></span>
+                        <?php endif; ?>
+                        </a>
+                        
                         <div class="cart-dropdown">
                             <div class="cart-dropdown-inner">
                             <?php if ($items) { 
@@ -178,7 +184,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                 if ( is_front_page() ) : ?>
                     <div class="site-description">
-                        <h2>Everything Plugs, Gauges Tapers and Accessories</h2>
+                        <h2>Everything Plugs, Spirals, Tapers and Tunnels</h2>
                     </div>
                 <?php
                 endif; ?>
